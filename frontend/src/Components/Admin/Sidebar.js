@@ -33,13 +33,17 @@ const Sidebar = () => {
           <Link to="/admin/medicines">
               <p className="Dashboard__item"><PostAddIcon /> All Medicines</p>
           </Link>
-
+          <Link to="/admin/doctors">
+              <p className="Dashboard__item"><PostAddIcon /> All Doctor</p>
+          </Link>
+          
           <Link to="/admin/product">
              <p><AddIcon />Create Product</p>
           </Link>
           <Link to="/admin/medicine">
              <p><AddIcon />Create Medicine</p>
           </Link>
+          
 
          
       <Link to="/admin/orders">

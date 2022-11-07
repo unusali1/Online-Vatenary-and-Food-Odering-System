@@ -7,7 +7,7 @@ import { cartReducer } from "./reducers/CartRuducer";
 import { allOrdersReducer, myOrdersReducer, newOrderReducer, orderDetailsReducer, orderReducer } from "./reducers/OrderReducer";
 import { deleteMedicineReducer, deleteMedicineReviewReducer, medicineDetailsReducer, medicineReviewsReducer, medicinesReducer, newMedicineReducer, newMedicineReviewReducer } from "./reducers/MedicineReducer";
 import { cartMedicineReducer } from "./reducers/CartReducerMedicine";
-import { doctorDetailsReducer, doctorsReducer } from "./reducers/DoctorReducer";
+import { deleteDoctorReducer, doctorDetailsReducer, doctorsReducer } from "./reducers/DoctorReducer";
 import { doctorReducer } from "./reducers/AppointmentReducer";
 import { allGetAppointmentsReducer, getAppointmentDetailsReducer, getAppointmentReducer, myGetAppointmentReducer, newGetAppointmentReducer } from "./reducers/GetAppointmentReducer";
 
@@ -40,6 +40,7 @@ const reducer = combineReducers({
   allUsers: allUsersReducer,
   doctors: doctorsReducer,
   doctorDetails: doctorDetailsReducer,
+  deleteDoctor: deleteDoctorReducer,
   userDetails: userDetailsReducer,
   forgotPassword:forgotPasswordReducer,
   doctorCart: doctorReducer,

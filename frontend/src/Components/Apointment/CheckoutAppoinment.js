@@ -1,23 +1,23 @@
 import React from "react";
 import { Typography, Stepper, StepLabel, Step } from "@material-ui/core";
-import LocalShippingIcon from "@material-ui/icons/LocalShipping";
-import LibraryAddCheckIcon from "@material-ui/icons/LibraryAddCheck";
+import LocalHospitalIcon from '@mui/icons-material/LocalHospital';
 import AccountBalanceIcon from "@material-ui/icons/AccountBalance";
+import PetsIcon from '@mui/icons-material/Pets';
 import "./CheckoutAppointment.css";
 
 
 const CheckoutSteps = ({ activeStep }) => {
   const steps = [
     {
-      label: <Typography>Shipping Details</Typography>,
-      icon: <LocalShippingIcon />,
+      label: <Typography>Animal Details</Typography>,
+      icon: <PetsIcon />,
     },
     {
-      label: <Typography>Confirm Order</Typography>,
-      icon: <LibraryAddCheckIcon />,
+      label: <Typography>Confirm Appointment</Typography>,
+      icon: <LocalHospitalIcon />,
     },
     {
-      label: <Typography>Payment</Typography>,
+      label: <Typography>Payment Doctor Fee</Typography>,
       icon: <AccountBalanceIcon />,
     },
   ];

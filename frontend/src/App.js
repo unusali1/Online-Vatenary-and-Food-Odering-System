@@ -61,6 +61,7 @@ import ConfirmAppointment from './Components/Apointment/ConfirmAppointment.js';
 import PaymentAppointment from "./Components/Apointment/PaymentAppointment.js";
 import SuccessAppointment from "./Components/Apointment/SuccessAppointment.js";
 import MyAppointment from './Components/User/MyAppointment.js';
+import AllDoctors from './Components/Admin/AllDoctor.jsx';
 // import MessengerCustomerChat from 'react-messenger-customer-chat';
 
 
@@ -125,6 +126,7 @@ const App = () => {
          
          <Route path="/doctors" element={< Doctors />} />  
          <Route path="/doctor/:id" element={< DoctorDetails />} />
+         <Route path="/admin/doctors" element={< AllDoctors />} />
          <Route path="/animalinfo" element={< Animalinfo/>} />
          <Route path="/appointment/confirm" element={< ConfirmAppointment />} />
          <Route path="/appointment/success" element={< SuccessAppointment />} />
