@@ -45,7 +45,7 @@ export const myGetAppointments = () => async (dispatch) => {
     try {
       dispatch({ type: MY_APPOINTMENTS_REQUEST });
   
-      const { data } = await axios.get("/api/v2/appointments/me");
+      const { data } = await axios.get("/api/v2/apointments/me");
   
       dispatch({ type: MY_APPOINTMENTS_SUCCESS, payload: data.appointments });
     } catch (error) {

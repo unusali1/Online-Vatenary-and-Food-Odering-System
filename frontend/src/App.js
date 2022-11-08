@@ -11,7 +11,8 @@ import ProductDetails from "./Components/Products/ProductDetails";
 import Profile from './Components/User/Profile.jsx';
 import UserData from './more/UserData.jsx';
 import Store from "./Store";
-//import ProtectedRoute from './route/ProtectedRoute.js';
+// import ProtectedRoute from './route/ProtectedRoute.js';
+import ProtectedRoute from './route/ProtectedRoute.js';
 import About from './Components/about/About.jsx';
 import Cart from './Components/cart/Cart.jsx';
 import Products from './Components/Products/Products.jsx';
@@ -60,8 +61,11 @@ import Rules from './more/Rules.jsx';
 import ConfirmAppointment from './Components/Apointment/ConfirmAppointment.js';
 import PaymentAppointment from "./Components/Apointment/PaymentAppointment.js";
 import SuccessAppointment from "./Components/Apointment/SuccessAppointment.js";
-import MyAppointment from './Components/User/MyAppointment.js';
 import AllDoctors from './Components/Admin/AllDoctor.jsx';
+import AllAppointment from './Components/Admin/AllApointments.jsx';
+import MyOrderDetails from './Components/User/MyOrderDetails.jsx';
+import MyAppointment from './Components/User/MyAppointment.jsx';
+import MyAppointmentDetails from './Components/User/MyAppointmentDetails.jsx';
 // import MessengerCustomerChat from 'react-messenger-customer-chat';
 
 
@@ -72,7 +76,7 @@ import AllDoctors from './Components/Admin/AllDoctor.jsx';
 
 const App = () => {
 
-  const {isAuthenticated,user} = useSelector((state) =>state.user);
+  const { isAuthenticated, user } = useSelector((state) => state.user);
 
   const [stripeApiKey, setStripeApiKey] = useState(" ");
 
@@ -82,100 +86,314 @@ const App = () => {
     setStripeApiKey(data.stripeApiKey);
   }
 
-  useEffect(()=>{
+  useEffect(() => {
     webFont.load({
-      google:{
+      google: {
         families: ["Roboto", "Droid Sans", "Chilanka"],
       }
     });
     Store.dispatch(loadUser());
     getStripeApiKey();
 
-  },[]);
+  }, []);
 
- 
+
 
   return (
     <BrowserRouter>
-     
-    <Header />
-    <BottomTab />
-    {isAuthenticated && <UserData user={user} />}
 
-     <Routes  >
-         <Route path="/" element={< Home  />} />
-         <Route path="/about" element={< About />} />
-         <Route path="/contact" element={< Contact />} />
-         <Route path="/faq" element={< Rules />} />
-         <Route path="/singnup" element={< SignUp />} />
-         
-         
-         <Route path="/products" element={< Products   />} />
-         <Route path="/search" element={< Search   />} />
-         <Route path="/products/:keyword" element= {<Products />} />
-         <Route path="/product/:id" element={< ProductDetails   />} />
+      <Header />
+      <BottomTab />
+      {isAuthenticated && <UserData user={user} />}
 
-         <Route path="/medicines" element={< Medicines   />} />
-         <Route path="/medicines/:keyword" element= {< Medicines />} />
-         <Route path="/medicine/:id" element={< MedicineDetails   />} />
-         <Route path="/admin/medicine" element={< CreateMedicine />} />
-         <Route path="/admin/medicines" element={< AllMedicines />} />  
-         <Route path="/cartmedi" element={< CartMedicine />} />
-         <Route path="/edit/medicine/:id" element={< EditMedicine />} /> 
-         <Route path="/doctorcart" element={< Appointment />} />
-         
-         <Route path="/doctors" element={< Doctors />} />  
-         <Route path="/doctor/:id" element={< DoctorDetails />} />
-         <Route path="/admin/doctors" element={< AllDoctors />} />
-         <Route path="/animalinfo" element={< Animalinfo/>} />
-         <Route path="/appointment/confirm" element={< ConfirmAppointment />} />
-         <Route path="/appointment/success" element={< SuccessAppointment />} />
-         <Route path="/appointments" element={< MyAppointment />} /> 
+      <Routes  >
+        <Route path="/" element={< Home />} />
+        <Route path="/about" element={< About />} />
+        <Route path="/password/forgot" element={< ForgotPassword />} />
+        <Route path="/password/reset/:token" element={< ResetPassword />} />
+        <Route path="/more" element={< MoreOption />} />
+        <Route path="/cart" element={< Cart />} />
+        <Route path="/login" element={< LoginSignup />} />
+        <Route path="/registration" element={< Registration />} />
+        <Route path="/doctorcart" element={< Appointment />} />
+        <Route path="/doctors" element={< Doctors />} />
+        <Route path="/doctor/:id" element={< DoctorDetails />} />
+        <Route path="/cartmedi" element={< CartMedicine />} />
+        <Route path="/contact" element={< Contact />} />
+        <Route path="/faq" element={< Rules />} />
+        <Route path="/singnup" element={< SignUp />} />
+        <Route path="/products" element={< Products />} />
+        <Route path="/search" element={< Search />} />
+        <Route path="/products/:keyword" element={<Products />} />
+        <Route path="/product/:id" element={< ProductDetails />} />
+        <Route path="/medicines" element={< Medicines />} />
+        <Route path="/medicines/:keyword" element={< Medicines />} />
+        <Route path="/medicine/:id" element={< MedicineDetails />} />
 
-         <Route path="/login" element={< LoginSignup   />} />
-         <Route path="/registration" element={< Registration  />} />
-         <Route path="/me" element={< Profile />} />
-         <Route path="/me/update" element={< UpdatePassword />} />
-         <Route path="/support" element={< Support/>} />
-         <Route path="/cart" element={< Cart />} />
-         <Route path="/shipping" element={< Shipping />} />
-         <Route path="/order/confirm" element={< ConfirmOrder />} />
+        <Route
+          path="/admin/medicine"
+          element={
+            <ProtectedRoute isAuthenticated={isAuthenticated} isAdmin={true}>
+              <CreateMedicine />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/admin/medicines"
+          element={
+            <ProtectedRoute isAuthenticated={isAuthenticated} isAdmin={true}>
+              <AllMedicines />
+            </ProtectedRoute>
+          }
+        />
 
-         <Route
-            path="/process/payment"
-            element={
-              <Elements stripe={loadStripe(stripeApiKey)}>
-                <Payment />
-              </Elements>
-            }
-          />
-            <Route
-            path="/process/appointment/payment"
-            element={
-              <Elements stripe={loadStripe(stripeApiKey)}>
-                < PaymentAppointment />
-              </Elements>
-            }
-          />
+        <Route
+          path="/edit/medicine/:id"
+          element={
+            <ProtectedRoute isAuthenticated={isAuthenticated} isAdmin={true}>
+              <EditMedicine />
+            </ProtectedRoute>
+          }
+        />
 
-          <Route path="/success" element={< Success />} />
-          <Route path="/more" element={< MoreOption />} />
-          <Route path="/dashboard" element={< Dashboard />} />
-          <Route path="/admin/product" element={< CreateProduct />} />
-          <Route path="/admin/products" element={< AllProducts />} />  
-          <Route path="/edit/product/:id" element={< EditProduct />} /> 
-          <Route path="/admin/orders" element={< AllOrder />} /> 
-          <Route path="/admin/order/:id" element={< UpdateOrder />} /> 
-          <Route path="/admin/users" element={< AllUsers />} /> 
-          <Route path="/admin/user/:id" element={< UpdateUser />} /> 
-          <Route path="/admin/reviews" element={< AllReviews />} />
-          <Route path="/password/forgot" element={< ForgotPassword />} />
-          <Route path="/password/reset/:token" element={< ResetPassword />} />
-          <Route path="/orders" element={< MyOrder />} /> 
-                  
-     </Routes>
-     {/* <MessengerCustomerChat pageId="100087493926566" appId="1089602411739540" /> */}
-     
+        <Route
+          path="/admin/doctors"
+          element={
+            <ProtectedRoute isAuthenticated={isAuthenticated} isAdmin={true}>
+              <AllDoctors />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/animalinfo"
+          element={
+            <ProtectedRoute isAuthenticated={isAuthenticated} >
+              <Animalinfo />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/appointment/confirm"
+          element={
+            <ProtectedRoute isAuthenticated={isAuthenticated} >
+              <ConfirmAppointment />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/appointment/success"
+          element={
+            <ProtectedRoute isAuthenticated={isAuthenticated}>
+              <SuccessAppointment />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/appointments"
+          element={
+            <ProtectedRoute isAuthenticated={isAuthenticated}  >
+              <MyAppointment />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/admin/appointments"
+          element={
+            <ProtectedRoute isAuthenticated={isAuthenticated} isAdmin={true} >
+              <AllAppointment />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/appointment/:id"
+          element={
+            <ProtectedRoute isAuthenticated={isAuthenticated}  >
+              < MyAppointmentDetails />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/me"
+          element={
+            <ProtectedRoute isAuthenticated={isAuthenticated}  >
+              < Profile />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/me/update"
+          element={
+            <ProtectedRoute isAuthenticated={isAuthenticated}  >
+              < UpdatePassword />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/support"
+          element={
+            <ProtectedRoute isAuthenticated={isAuthenticated}  >
+              < Support />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/shipping"
+          element={
+            <ProtectedRoute isAuthenticated={isAuthenticated}  >
+              < Shipping />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/order/confirm"
+          element={
+            <ProtectedRoute isAuthenticated={isAuthenticated}  >
+              < ConfirmOrder />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/order/:id"
+          element={
+            <ProtectedRoute isAuthenticated={isAuthenticated}  >
+              < MyOrderDetails />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/process/payment"
+          element={
+            <Elements stripe={loadStripe(stripeApiKey)}>
+              <Payment />
+            </Elements>
+          }
+        />
+
+        <Route
+          path="/process/appointment/payment"
+          element={
+            <Elements stripe={loadStripe(stripeApiKey)}>
+              < PaymentAppointment />
+            </Elements>
+          }
+        />
+
+        <Route
+          path="/success"
+          element={
+            <ProtectedRoute isAuthenticated={isAuthenticated}  >
+              < Success />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/dashboard"
+          element={
+            <ProtectedRoute isAuthenticated={isAuthenticated} isAdmin={true} >
+              < Dashboard />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/admin/product"
+          element={
+            <ProtectedRoute isAuthenticated={isAuthenticated} isAdmin={true} >
+              < CreateProduct />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/admin/products"
+          element={
+            <ProtectedRoute isAuthenticated={isAuthenticated} isAdmin={true} >
+              < AllProducts />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/edit/product/:id"
+          element={
+            <ProtectedRoute isAuthenticated={isAuthenticated} isAdmin={true} >
+              < EditProduct />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/admin/orders"
+          element={
+            <ProtectedRoute isAuthenticated={isAuthenticated} isAdmin={true} >
+              <  AllOrder />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/admin/order/:id"
+          element={
+            <ProtectedRoute isAuthenticated={isAuthenticated} isAdmin={true} >
+              < UpdateOrder />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/admin/users"
+          element={
+            <ProtectedRoute isAuthenticated={isAuthenticated} isAdmin={true} >
+              < AllUsers />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/admin/user/:id"
+          element={
+            <ProtectedRoute isAuthenticated={isAuthenticated} isAdmin={true} >
+              < UpdateUser />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/admin/reviews"
+          element={
+            <ProtectedRoute isAuthenticated={isAuthenticated} isAdmin={true} >
+              <AllReviews />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/orders"
+          element={
+            <ProtectedRoute isAuthenticated={isAuthenticated}  >
+              <MyOrder />
+            </ProtectedRoute>
+          }
+        />
+
+
+
+      </Routes>
+
+
     </BrowserRouter>
   );
 };

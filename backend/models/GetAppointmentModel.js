@@ -1,34 +1,27 @@
 const mongoose = require("mongoose");
 
 const getAppointmentSchema = new mongoose.Schema({
-  AnimalInfo: {
+  animalInfo: {
     address: {
       type: String,
-      // required: true,
+      //required: true,
     },
     animal: {
       type: String,
       //  required: true,
     },
     problem: {
-        type: String,
-        //  required: true,
-      },
+      type: String,
+      //  required: true,
+    },
     age: {
-        type: 'number',
-       
+      type: Number,
+
     },
-    date: {
-      type: Date,
-      // required: true,
-    },
-    time: {
-      type: Date,
-      // required: true,
-    },
+
     phoneNo: {
       type: Number,
-    //  required: true,
+      //  required: true,
     },
   },
   getDoctor: [
@@ -84,7 +77,7 @@ const getAppointmentSchema = new mongoose.Schema({
     required: true,
     default: 0,
   },
-totalPrice: {
+  totalPrice: {
     type: Number,
     required: true,
     default: 0,

@@ -1,21 +1,27 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
-import { Route, useNavigate } from 'react-router-dom';
+import { Navigate, Outlet } from "react-router-dom";
 
+const ProtectedRoute = ({
+   isAdmin, 
+   children,
+   component: Component,
+   redirect= "/login",
+    ...rest
+}) => {
 
-const ProtectedRoute = ({isAdmin}) => {
-
-    const navigate =useNavigate()
-    const {loading, isAuthenticated, user} = useSelector((state) => state.user);
-
-    return (
-       <>
-        {loading === false && (
-
-                    isAuthenticated ? isAuthenticated : navigate("/login")
-                       )}
-       </>
-    )
+    const { isAuthenticated, user} = useSelector((state) => state.user);
+     
+    if(isAuthenticated === false){
+      return <Navigate to={redirect} />
+  }
+  if(isAdmin === true && user.role !=="admin"){
+   return  <Navigate to={redirect}/>
 }
 
-export default ProtectedRoute;
+    
+ return children ? children : <Outlet />;
+    
+}
+
+export default ProtectedRoute

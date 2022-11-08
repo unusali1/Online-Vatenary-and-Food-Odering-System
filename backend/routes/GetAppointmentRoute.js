@@ -10,8 +10,8 @@ router.route("/appointment/:id").get(isAuthenticatedUser, getSingleAppointment);
 
 router.route("/apointments/me").get(isAuthenticatedUser, getAllAppointments);
 
-router.route("/admin/orders").get(isAuthenticatedUser, authorizeRoles("admin"), getAdminAllAppointments);
+router.route("/admin/appointments").get(isAuthenticatedUser, authorizeRoles("admin"), getAdminAllAppointments);
 
-router.route("/admin/order/:id").delete(isAuthenticatedUser, authorizeRoles("admin"), deleteAppointment);
+router.route("/admin/appointment/:id").delete(isAuthenticatedUser, authorizeRoles("admin"), deleteAppointment);
 
 module.exports = router;

@@ -21,8 +21,8 @@ const Animalinfo = () => {
   const [animal, setAnimal] = useState(AimalInfo.animal);
   const [problem, setProblem] = useState(AimalInfo.problem);
   const [age, setAge] = useState(AimalInfo.age);
-  const [date, setDate] = useState(AimalInfo.date);
-  const [time, setTime] = useState(AimalInfo.time);
+  // const [date, setDate] = useState(AimalInfo.date);
+  // const [time, setTime] = useState(AimalInfo.time);
   // eslint-disable-next-line
   const [phoneNo, setPhoneNo] = useState(AimalInfo.phoneNo);
 
@@ -33,7 +33,7 @@ const Animalinfo = () => {
       toast.error("Phone Number should be 11digits");
       return;
     }
-    dispatch(saveAnimalInfo({ address,animal,problem,age,date,time, phoneNo }));
+    dispatch(saveAnimalInfo({ address,animal,problem,age,phoneNo }));
     navigate("/appointment/confirm");
   };
 
@@ -96,7 +96,7 @@ const Animalinfo = () => {
               />
             </div>
 
-            <div>
+            {/* <div>
               <HomeIcon />
               <input
                 type="date"
@@ -116,7 +116,7 @@ const Animalinfo = () => {
                 value={time}
                 onChange={(e) => setTime(e.target.value)}
               />
-            </div>
+            </div> */}
 
             <div>
               <PhoneIcon />

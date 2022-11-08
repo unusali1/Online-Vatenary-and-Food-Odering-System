@@ -4,12 +4,12 @@ import { useSelector, useDispatch } from "react-redux";
 import MetaData from "../../more/Metadata";
 import { Link, useParams } from "react-router-dom";
 import { Typography } from "@material-ui/core";
-import { getOrderDetails, clearErrors } from "../../actions/OrderAction";
+import { getGetAppointmentDetails, clearErrors } from "../../actions/GetAppointmentAction";
 import Loading from "../../more/Loader";
-import BottomTab from "../../more/BottomTab";
 
-const MyOrderDetails = () => {
-  const { order, error, loading } = useSelector((state) => state.myOrderDetails);
+
+const MyAppointmentDetails = () => {
+  const { appointment, error, loading } = useSelector((state) => console.log(state));
 
   const dispatch = useDispatch();
 
@@ -21,51 +21,44 @@ const MyOrderDetails = () => {
       dispatch(clearErrors());
     }
 
-    dispatch(getOrderDetails(id));
-  }, [dispatch, alert, error, id]);
+    dispatch(getGetAppointmentDetails(id));
+  }, [dispatch,  error, id]);
   return (
     <>
       {loading ? (
         <Loading />
       ) : (
         <>
-          <MetaData title="Order Details" />
+          <MetaData title="Appointment Details" />
           <div className="orderDetailsPage">
             <div className="orderDetailsContainer">
               <Typography component="h1">
-                Order #{order && order._id}
+              appointment #{appointment && appointment._id}
               </Typography>
-              <Typography>Shipping Info</Typography>
+              <Typography>Animal Info</Typography>
               <div className="orderDetailsContainerBox">
                 <div>
                   <p>Name:</p>
-                  <span>{order.user && order.user.name}</span>
+                  <span>{appointment.user && appointment.user.name}</span>
                 </div>
                 <div>
                   <p>Phone:</p>
                   <span>
-                    {order.shippingInfo && order.shippingInfo.phoneNo}
+                    {appointment.AnimalInfo && appointment.AnimalInfo.phoneNo}
                   </span>
                 </div>
                 <div>
                   <p>Address:</p>
                   <span>
-                    {order.shippingInfo &&
-                      `${order.shippingInfo.address}, ${order.shippingInfo.state}`}
+                    {appointment.AnimalInfo &&
+                      `${appointment.AnimalInfo.address}`}
                   </span>
                 </div>
               </div>
               <Typography>Payment</Typography>
               <div className="orderDetailsContainerBox">
                 <div>
-                  <p
-                    className={
-                      order.orderStatus === "Delivered"
-                        ? "greenColor"
-                        : "redColor"
-                    }
-                  >                  
-                  </p>
+                 
                   <p style={{
                       color:"green"
                   }}>
@@ -75,12 +68,12 @@ const MyOrderDetails = () => {
 
                 <div>
                   <p>Amount:</p>
-                  <span>$ {order.totalPrice && order.totalPrice}</span>
+                  <span>$ {appointment.totalPrice && appointment.totalPrice}</span>
                 </div>
               </div>
 
               <Typography>Order Status</Typography>
-              <div className="orderDetailsContainerBox">
+              {/* <div className="orderDetailsContainerBox">
                 <div>
                   <p
                     className={
@@ -92,23 +85,21 @@ const MyOrderDetails = () => {
                     {order.orderStatus && order.orderStatus}
                   </p>
                 </div>
-              </div>
+              </div> */}
             </div>
 
             <div className="orderDetailsCartItems">
-              <Typography>Order Items:</Typography>
+              <Typography>Appointment Doctor:</Typography>
               <div className="orderDetailsCartItemsContainer">
 
-                {order.orderItems &&
-                  order.orderItems.map((item) => (
+                {appointment.getDoctor &&
+                 appointment.getDoctor.map((item) => (
                     <div key={item.Offer}>
                       <img src={item.image} alt="Product" />
-                      <Link to={`/product/${item.Offer}`}>
-                        {item.name}
-                      </Link>{" "}
+                     
                       <span>
-                        {item.quantity} X ${item.price} ={" "}
-                        <b>${item.price * item.quantity}</b>
+                        ${item.price} ={" "}
+                        <b>${item.price }</b>
                       </span>
                     </div>
                   ))}
@@ -119,9 +110,9 @@ const MyOrderDetails = () => {
           </div>
         </>
       )}
-      <BottomTab />
+      
     </>
   );
 };
 
-export default MyOrderDetails;
+export default MyAppointmentDetails;

@@ -59,8 +59,6 @@ exports.getAllAppointments = catchAsyncError(async (req,res,next) =>{
 // Get All Appointments ---Admin
 exports.getAdminAllAppointments = catchAsyncError(async (req,res,next) =>{
     const appointments = await GetAppointment.find();
-
-
     res.status(200).json({
         success: true,
         appointments

@@ -52,6 +52,14 @@ const Sidebar = () => {
           Orders
         </p>
       </Link>
+     
+      <Link to="/admin/appointments">
+        <p>
+          <ListAltIcon />
+          Appointments
+        </p>
+      </Link>
+
       <Link to="/admin/users">
         <p>
           <PeopleIcon /> Users

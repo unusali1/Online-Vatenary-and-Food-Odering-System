@@ -43,7 +43,7 @@ useEffect(() => {
       }
   
       if (isDeleted) {
-        toast.success("Product Deleted Successfully");
+        toast.success("Doctor Deleted Successfully");
         navigate("/dashboard");
         dispatch({ type: DELETE_DOCTOR_RESET });
       }
@@ -59,17 +59,17 @@ const columns = [
       minWidth: 350,
       flex: 1,
     },
-    {
-      field: "stock",
-      headerName: "Stock",
-      type: "number",
-      minWidth: 150,
-      flex: 0.0,
-    },
+    // {
+    //   field: "stock",
+    //   headerName: "Stock",
+    //   type: "number",
+    //   minWidth: 150,
+    //   flex: 0.0,
+    // },
 
     {
-      field: "price",
-      headerName: "Price",
+      field: "fee",
+      headerName: "Fee",
       type: "number",
       minWidth: 270,
       flex: 0,
@@ -108,8 +108,7 @@ const columns = [
     doctors.forEach((item) => {
       rows.push({
         id: item._id,
-        stock: item.stock,
-        price: item.price,
+        fee: item.price,
         name: item.name,
       });
     });

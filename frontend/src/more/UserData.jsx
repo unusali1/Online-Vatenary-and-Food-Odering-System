@@ -39,6 +39,7 @@ const UserData = ({ user }) => {
   const options = [
     { icon: <HomeIcon />, name: "Home", func: home },
     { icon: <ListAltIcon />, name: "Orders", func: orders },
+    { icon: <ListAltIcon />, name: "Appointments", func: appointments },
     {
       icon: (
         <ShoppingCartIcon
@@ -79,6 +80,9 @@ const UserData = ({ user }) => {
   }
   function orders() {
     navigate("/orders");
+  }
+  function appointments() {
+    navigate("/appointments");
   }
   function cart() {
     navigate("/cart");
