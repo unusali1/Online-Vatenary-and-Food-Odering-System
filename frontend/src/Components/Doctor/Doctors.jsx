@@ -9,20 +9,11 @@ import "../Products/Products.css"
 import Typography from"@material-ui/core/Typography"
 import MetaData from "../../more/Metadata";
 import { useParams } from "react-router-dom";
-import Bounce from 'react-reveal/Bounce';
+import Rotate from 'react-reveal/Rotate';
 
 
 
-const categories = [
-  "Dhaka",
-  "Rangpur",
-  "Barisal",
-  "Rajshahi",
-  "Khulna",
-  "Chittagong",
-  "Mymansingh",
-  
-]
+
 
 const Doctors = ( ) => {
   const dispatch = useDispatch();
@@ -85,27 +76,7 @@ const Doctors = ( ) => {
                 display:"flex",
                 flex:1,
             }}>
-                <Bounce right>
-                <div className="sidebar__products" style={{
-                  border: "1px solid #999",
-                  margin:"1vmax",
-                  flex:".177"
-              }}>
-                  <Typography style={{fontSize:"1.2vmax",padding:"5px"}}>CHOOSE LOCATION</Typography>
-                  <ul className="categoryBox">
-                      {categories.map((category) =>(
-                          <li
-                          className="category-link"
-                          key={category}
-                          onClick={() =>setCategory(category)}
-                          type="checkbox">
-                          {category}
-                          </li> 
-                      ))}
-                  </ul>
                 
-              </div>
-                </Bounce>
             <div
              className="products"
              style={{
@@ -117,9 +88,9 @@ const Doctors = ( ) => {
            >
              {doctors &&
                doctors.map((doctor) => (
-                <Bounce left>
+                <Rotate top left>
                  <DoctorCard key={doctor.id} doctor={doctor} />
-                 </Bounce>
+                 </Rotate>
                ))}
            </div>
               

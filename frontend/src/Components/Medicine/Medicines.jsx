@@ -9,18 +9,19 @@ import "./Medicines.css"
 import Typography from"@material-ui/core/Typography"
 import MetaData from "../../more/Metadata";
 import { useParams } from "react-router-dom";
+import Bounce from 'react-reveal/Bounce';
 
 
 const categories = [
-  "Feed Mix",
-  "Cow Food",
-  "Buffalo Food",
-  "Goat Food",
-  "Horse Food",
-  "Cat Food",
-  "Dog Food",
-  "Fish Food",
-  "Chicken Food",
+  
+  "Cow Medicine",
+  "Buffalo Medicine",
+  "Goat Medicine",
+  "Horse Medicine",
+  "Cat Medicine",
+  "Dog Medicine",
+  "Fish Medicine",
+  "Chicken Medicine",
 ]
 
 const Medicines = ( ) => {
@@ -84,6 +85,7 @@ const Medicines = ( ) => {
                 display:"flex",
                 flex:1,
             }}>
+                <Bounce right>
                 <div className="sidebar__products" style={{
                   border: "1px solid #999",
                   margin:"1vmax",
@@ -101,17 +103,9 @@ const Medicines = ( ) => {
                           </li> 
                       ))}
                   </ul>
-                  <Typography style={{fontSize:"1.2vmax",padding:"5px"}}>QUICK LINKS</Typography>
-                  <li className="category-link">
-                      My Carts
-                  </li>
-                  <li className="category-link">
-                      Favourites Items
-                  </li>
-                  <li className="category-link">
-                      Go to Checkout
-                  </li>
+                 
               </div>
+                </Bounce>
 
              
               
@@ -126,7 +120,9 @@ const Medicines = ( ) => {
            >
              {medicines &&
                medicines.map((medicine) => (
-                 <MedicineCard key={medicine.id} medicine={medicine} />
+                <Bounce left>
+                   <MedicineCard key={medicine.id} medicine={medicine} />
+                </Bounce>
                ))}
            </div>
               

@@ -1,5 +1,5 @@
 import React, { Fragment, useEffect, useState } from "react";
-import "./newProduct.css";
+import "./newMedicine.css";
 import { useSelector, useDispatch } from "react-redux";
 import { Button } from "@material-ui/core";
 import MetaData from "../../more/Metadata";
@@ -27,6 +27,8 @@ const CreateMedicine = () => {
   const [type, setType] = useState("");
   const [description, setDescription] = useState("");
   const [category, setCategory] = useState("");
+  const [psize, setPsize] = useState("");
+  const [packaging, setPackaging] = useState("");
   const [stock, setStock] = useState(0);
   const [price, setPrice] = useState(0);
  
@@ -70,7 +72,7 @@ const CreateMedicine = () => {
     e.preventDefault();
     if (!image) return alert("Please upload your profile picture");
     const url = await uploadImage(image);
-    dispatch(createMedicine({ name,price,brand,type,description,stock, category, images: url }))
+    dispatch(createMedicine({ name,price,brand,type,description,stock,psize, packaging , category, images: url }))
   };
 
   useEffect(() => {
@@ -88,15 +90,14 @@ const CreateMedicine = () => {
 
 
   const categories = [
-    "Feed Mix",
-    "Cow Food",
-    "Buffalo Food",
-    "Goat Food",
-    "Horse Food",
-    "Cat Food",
-    "Dog Food",
-    "Fish Food",
-    "Chicken Food",
+    "Cow Medicine",
+    "Buffalo Medicine",
+    "Goat Medicine",
+    "Horse Medicine",
+    "Cat Medicine",
+    "Dog Medicine",
+    "Fish Medicine",
+    "Chicken Medicine",
   ];
 
 
@@ -106,7 +107,7 @@ const CreateMedicine = () => {
       <MetaData title="Create Product" />
       <div className="dashboard">
         <SideBar />
-        <div className="newProductContainer">
+        <div className="newProductContainerr">
           <form
             className="createProductForm"
             encType="multipart/form-data"
@@ -118,7 +119,7 @@ const CreateMedicine = () => {
               <SpellcheckIcon />
               <input
                 type="text"
-                placeholder="Product Name"
+                placeholder="Medicine Name"
                 required
                 value={name}
                 onChange={(e) => setName(e.target.value)}
@@ -146,16 +147,35 @@ const CreateMedicine = () => {
               <MergeTypeIcon />
               <input
                 type="text"
-                placeholder="Food Type"
+                placeholder="Medicine Type"
                 required
                 onChange={(e) => setType(e.target.value)}
+              />
+            </div>
+            <div>
+              <MergeTypeIcon />
+              <input
+                type="text"
+                placeholder="Packaging Type"
+                required
+                onChange={(e) => setPackaging(e.target.value)}
+              />
+            </div>
+
+            <div>
+              <MergeTypeIcon />
+              <input
+                type="text"
+                placeholder="Packiaging Size"
+                required
+                onChange={(e) => setPsize(e.target.value)}
               />
             </div>
 
             <div>
               <DescriptionIcon />
               <textarea
-                placeholder="Product Description"
+                placeholder="Medicine Description"
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
                 cols="30"
@@ -191,7 +211,7 @@ const CreateMedicine = () => {
             </div>
 
             <div id="createProductFormImage">
-              <img src={imagePreview} className="signup-profile-pic" />
+            
             </div>
             <Button id="createProductBtn" type="submit">
               {upladingImg || loading ? "Createing....." : "Create"}

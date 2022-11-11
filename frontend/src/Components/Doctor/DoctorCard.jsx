@@ -11,7 +11,7 @@ const DoctorCard = ({ doctor }) => {
               className="ProductImg"
             />
             <p className="productName">{doctor.name}</p>
-           
+             <p className="productName">Specilized:{doctor.category}</p>
             <div
               style={{
                 display: "flex",
@@ -27,7 +27,7 @@ const DoctorCard = ({ doctor }) => {
                     paddingBottom: "0",
                   }}
                 >
-                 
+                
                 </h1>
                
                 <p className="seemore">See Details</p>

@@ -53,7 +53,7 @@ const Cart = () => {
           <RemoveShoppingCartIcon />
           <Typography>No Items In Cart</Typography>
           <Link to="/products">View Products</Link>
-          {/* <BottomTab /> */}
+        
         </div>
       ) : (
         <>
@@ -89,7 +89,7 @@ const Cart = () => {
                       +
                     </button>
                   </div>
-                  <p className="cartSubtotal">{`$${
+                  <p className="cartSubtotal">{`৳ ${
                     item.price * item.quantity
                   }`}</p>
                 </div>
@@ -99,7 +99,7 @@ const Cart = () => {
               <div></div>
               <div className="cartGrossProfitBox">
                 <p>Price Total</p>
-                <p>$ {totalPrice}</p>
+                <p>৳ {totalPrice}</p>
               </div>
               <div></div>
               <div className="checkOutBtn">
@@ -118,7 +118,7 @@ const Cart = () => {
             draggable
             pauseOnHover
           />
-          {/* <BottomTab /> */}
+         
         </>
       )}
     </>

@@ -22,7 +22,7 @@ const UpdateOrder = () => {
   const { order, error, loading } = useSelector((state) => state.myOrderDetails);
   const { error: updateError, isUpdated } = useSelector((state) => state.deleteOrder);
   
-  console.log(order);
+  
   const {id } = useParams();
 
   const updateOrderSubmitHandler = (e) => {
@@ -55,21 +55,21 @@ const UpdateOrder = () => {
   }, [dispatch, error, id, isUpdated, updateError]);
 
   return (
-    <Fragment>
+    <Fragment >
       <MetaData title="Process Order" />
       <div className="dashboard">
         <SideBar />
-        <div className="newProductContainer">
+        <div >
           {loading ? (
             <Loading />
           ) : (
             <div
-              className="confirmOrderPage"
+              className="confirmOrderPages"
               style={{
                 display: order.orderStatus === "Delivered" ? "block" : "grid",
               }}
             >
-              <div>
+              <div className="updorder">
                 <div className="confirmshippingArea">
                   <Typography>Shipping Info</Typography>
                   <div className="orderDetailsContainerBox">
@@ -128,8 +128,9 @@ const UpdateOrder = () => {
                   <div className="confirmCartItemsContainer">
                     {order.orderItems &&
                       order.orderItems.map((item) => (
-                        <div key={item.product}>
-                          <img src={item.image} alt="Product" />
+                       
+                       <div key={item.product}>
+                           <img src={item.image} alt="Product" />
                           <Link to={`/product/${item.product}`}>
                             {item.name}
                           </Link>{" "}

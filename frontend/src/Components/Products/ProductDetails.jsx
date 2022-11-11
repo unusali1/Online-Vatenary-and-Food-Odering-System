@@ -118,7 +118,7 @@ const ProductDetails = () => {
                     display: "flex",
                   }}
                 >
-                  <h1>{`$${product.price}`}</h1>
+                  <h1>{`৳${product.price}`}</h1>
                  
                 </div>
                 <div className="detailsBlock-3-1">
@@ -131,7 +131,7 @@ const ProductDetails = () => {
                 </div>
                 <p className="stock__meta" style={{ paddingBottom: ".5vmax" }}>
                   <b className={product.stock < 1 ? "redColor" : "greenColor"}>
-                    {product.stock < 1 ? "OutOfStock" : "InStock"}
+                    {product.stock < 1 ? "Out Of Stock" : "In Stock"}
                   </b>
                 </p>
                 <div>

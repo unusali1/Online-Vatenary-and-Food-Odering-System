@@ -49,7 +49,7 @@ const orderSchema = new mongoose.Schema({
         type: Number,
         //required: true,
       },
-      product: {
+      pid: {
         type: mongoose.Schema.ObjectId,
         ref: "Product",
         //required: true,

@@ -33,33 +33,33 @@ const medicineSchema = new mongoose.Schema({
         default: 0,
     },
     images: {
-        type : "string",
-     },
-     brand:{
+        type: "string",
+    },
+    brand: {
         type: "string",
         required: [true, "Please Enter a name of a Medicine Brand"],
         trim: true,
         maxlength: [50, "Medicine must be at least 20 characters"],
-        
-     },
-     type:{
+
+    },
+    type: {
         type: "string",
         required: [true, "Please Enter a type of a Medicine"],
         trim: true,
         maxlength: [50, "Medicine must be at least 20 characters"]
-     },
-     packaging:{
+    },
+    packaging: {
         type: String,
-        default: "PP Bags"
-   },
-  shelf:{
-   type: String,
-   default: "12 Months"
- },
- psize:{
-   type: String,
-   default: "50kg & 25kg"
- },
+
+    },
+    shelf: {
+        type: String,
+        default: "12 Months"
+    },
+    psize: {
+        type: String,
+
+    },
     category: {
         type: 'string',
         required: [true, "Please Enter a category of a Medicine"],

@@ -34,7 +34,7 @@ const CreateProduct = () => {
 
   const [image, setImage] = useState(null);
   const [upladingImg, setUploadingImg] = useState(false);
-  const [imagePreview, setImagePreview] = useState(null);
+
 
   function validateImg(e) {
     const file = e.target.files[0];
@@ -42,7 +42,7 @@ const CreateProduct = () => {
       return alert("Max file size is 5mb");
     } else {
       setImage(file);
-      setImagePreview(URL.createObjectURL(file));
+     
     }
   }
 
@@ -191,7 +191,7 @@ const CreateProduct = () => {
             </div>
 
             <div id="createProductFormImage">
-              <img src={imagePreview} className="signup-profile-pic" />
+             
             </div>
             <Button id="createProductBtn" type="submit">
               {upladingImg || loading ? "Createing....." : "Create"}

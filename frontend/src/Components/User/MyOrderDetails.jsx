@@ -6,7 +6,7 @@ import { Link, useParams } from "react-router-dom";
 import { Typography } from "@material-ui/core";
 import { getOrderDetails, clearErrors } from "../../actions/OrderAction";
 import Loading from "../../more/Loader";
-import BottomTab from "../../more/BottomTab";
+
 
 const MyOrderDetails = () => {
   const { order, error, loading } = useSelector((state) => state.myOrderDetails);
@@ -75,7 +75,7 @@ const MyOrderDetails = () => {
 
                 <div>
                   <p>Amount:</p>
-                  <span>$ {order.totalPrice && order.totalPrice}</span>
+                  <span>৳ {order.totalPrice && order.totalPrice}</span>
                 </div>
               </div>
 
@@ -107,8 +107,8 @@ const MyOrderDetails = () => {
                         {item.name}
                       </Link>{" "}
                       <span>
-                        {item.quantity} X ${item.price} ={" "}
-                        <b>${item.price * item.quantity}</b>
+                        {item.quantity} X ৳ {item.price} ={" "}
+                        <b>৳ {item.price * item.quantity}</b>
                       </span>
                     </div>
                   ))}
@@ -119,7 +119,7 @@ const MyOrderDetails = () => {
           </div>
         </>
       )}
-      <BottomTab />
+     
     </>
   );
 };

@@ -39,7 +39,7 @@ const ProductCard = ({ product }) => {
                 >
                  
                 </h1>
-                <span className="p__Price">{`$${product.price}`}</span>
+                <span className="p__Price">{`৳${product.price}`}</span>
                 <p className="seemore">See More</p>
               </div>
             </div>

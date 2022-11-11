@@ -12,7 +12,7 @@ import {
     dispatch({
       type: ADD_TO_CART,
       payload: {
-        product: data.product._id,
+        pid: data.product._id,
         name: data.product.name,
         price: data.product.price,
         image: data.product.images,
