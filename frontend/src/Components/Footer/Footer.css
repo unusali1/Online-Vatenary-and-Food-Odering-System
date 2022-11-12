@@ -19,6 +19,7 @@ ul{
 .footer{
 	background-color: #24262b;
     padding: 70px 0;
+	height: 62vh;
 }
 .footer-col{
    width: 25%;
@@ -75,6 +76,31 @@ ul{
 	color: #24262b;
 	background-color: #ffffff;
 }
+
+.copyright {
+	text-align: center;
+	display: flex;
+	text-align: center;
+	background: aliceblue;
+	margin-top:60px ;
+	background-color: #24262b;
+	color: #ffffff;
+  }
+  
+  .copyright a:hover {
+	color: tomato;
+	transition: 2s;
+  }
+  
+  .footer-link a {
+	color: #404655;
+	font-weight: 500;
+  }
+  
+  .footer-link a:hover {
+	color: #007bff;
+	transition: 1s;
+  }
 
 /*responsive*/
 @media(max-width: 767px){

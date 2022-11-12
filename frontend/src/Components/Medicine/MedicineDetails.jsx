@@ -118,7 +118,7 @@ const MedicineDetails = () => {
                     display: "flex",
                   }}
                 >
-                  <h1>{`$${medicine.price}`}</h1>
+                  <h1>{`৳${medicine.price}`}</h1>
                  
                 </div>
                 <div className="detailsBlock-3-1">

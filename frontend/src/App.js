@@ -66,13 +66,6 @@ import AllAppointment from './Components/Admin/AllApointments.jsx';
 import MyOrderDetails from './Components/User/MyOrderDetails.jsx';
 import MyAppointment from './Components/User/MyAppointment.jsx';
 import MyAppointmentDetails from './Components/User/MyAppointmentDetails.jsx';
-// import MessengerCustomerChat from 'react-messenger-customer-chat';
-
-
-// const promise = loadStripe(
-//   "pk_test_51LhIOaJkj63K7pnU9GiT5YjHovEX50TuuxR7W0DZ5Wnb1rjsQLT22rI1sqbJCYRrmVMoqeUqTaWvAhM2RBSFOSuu00czRQnHJC"
-// );
-
 
 const App = () => {
 
@@ -392,6 +385,7 @@ const App = () => {
 
 
       </Routes>
+
 
 
     </BrowserRouter>

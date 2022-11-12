@@ -4,6 +4,7 @@ import Footer from "../Footer/Footer";
 import Loading from "../../more/Loader";
 import MetaData from "../../more/Metadata";
 import "./About.css";
+import home5 from "../../Assets/home5.jpg"
 
 
 const About = () => {
@@ -27,7 +28,7 @@ const About = () => {
         {/* 1st verse */}
         <div className="row flex">
           <div className="col__2">
-            <img src="http://wp.alithemes.com/html/nest/demo/assets/imgs/page/about-1.png" alt="not found" />
+            <img src={home5} alt="not found" />
           </div>
           <div className="col__2">
             <div className="meta">
@@ -38,7 +39,7 @@ const About = () => {
                   lineHeight: "1.2",
                 }}
               >
-                Welcome to Nest
+                Welcome to OVFOS
               </span>
               <p>
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed

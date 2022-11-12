@@ -10,6 +10,7 @@ import home1 from "../../Assets/home1.jpg"
 import home2 from "../../Assets/home2.jpg"
 import home3 from "../../Assets/home3.PNG"
 import Footer from "../Footer/Footer";
+import Bounce from 'react-reveal/Bounce';
 
 
 const Home = () => {
@@ -31,7 +32,7 @@ const Home = () => {
             <div className="home-section">
                 <MetaData title="Home" />
 
-                {/* Carousel */}
+                
                 <div className="banners">
                     <Carousel className="caros">
                         <img src={home3} className="bgImgs" alt="not found" />
@@ -43,11 +44,7 @@ const Home = () => {
                             display: "flex",
                             alignItems: "center",
                         }}>
-                            {/* <h2 style={{
-                                fontFamily: "Segoe Script",
-                                fontSize: "3em",
-                                fontWeight: "500"
-                            }}></h2> */}
+                            
                             <span style={{
                                 padding: "10px",
 
@@ -64,22 +61,7 @@ const Home = () => {
                                 alignItems: "center"
                             }}></span>
                         </div>
-                        {/* <div>
-                            <h2 style={{
-                                fontSize: "4.5em",
-                                fontFamily: "Poppins,sans-serif",
-                                color: "#fff",
-                            }}></h2>
-                        </div> */}
-                        {/* <div>
-                            <h2 style={{
-                                fontSize: "4.5em",
-                                fontWeight: "400",
-                                fontFamily: "Poppins,sans-serif",
-                                color: "#fff",
-                                lineHeight: ".7"
-                            }}></h2>
-                        </div> */}
+                       
                         <div>
                             <h2
                                 style={{
@@ -118,7 +100,9 @@ const Home = () => {
                     {loading && <h3>Loading....</h3>}
                     {error && <h4>{error.message}</h4>}
                     {products && products.map((product) => (
-                        <ProductCard key={product._id} product={product} />
+                       <Bounce left>
+                         <ProductCard key={product._id} product={product} />
+                       </Bounce>
                     ))}
 
                 </div>

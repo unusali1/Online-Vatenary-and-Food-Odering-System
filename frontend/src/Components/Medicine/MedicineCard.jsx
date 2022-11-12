@@ -38,7 +38,7 @@ const MedicineCard = ({ medicine }) => {
                 >
                  
                 </h1>
-                <span className="p__Price">{`$${medicine.price}`}</span>
+                <span className="p__Price">{`৳${medicine.price}`}</span>
               </div>
             </div>
           </Link>

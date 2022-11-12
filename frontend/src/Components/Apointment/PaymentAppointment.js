@@ -38,8 +38,9 @@ const Payment = () => {
   const paymentData = {
     amount: Math.round(appointmentInfo.totalPrice * 100),
   };
-
+   
   const appointment = {
+
     AimalInfo,
     getDoctor: doctorAppoin,
     itemsPrice: appointmentInfo.subtotal,

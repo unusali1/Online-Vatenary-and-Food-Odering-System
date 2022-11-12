@@ -43,6 +43,22 @@ const Footer = () => {
             <a href="#"><i className="fab fa-linkedin-in"></i></a>
           </div>
         </div>
+        <div className="copyright">
+				<small>
+					Designed & Build by{" "}
+					<a
+						href="mailto:support@gmail.com"
+						style={{ color: "rgb(26 210 14)" }}
+					>
+						Online Vatenary & Food Odering System
+					</a>
+				</small>
+				<br />
+				<small>
+					{new Date().getFullYear()} &copy; copyright | Online Vatenary & Food Odering System
+				</small>
+				<br />
+			</div>
       </div>
     </div>
  </footer>
