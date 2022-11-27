@@ -2,24 +2,28 @@ const mongoose = require("mongoose");
 
 const orderSchema = new mongoose.Schema({
   shippingInfo: {
-    address: {
+    house: {
       type: String,
       required: true,
     },
-    city: {
+    road: {
       type: String,
       //  required: true,
     },
-    state: {
+    village: {
       type: String,
       required: true,
     },
-    country: {
+    postoffce: {
       type: String,
       required: true,
     },
-    pinCode: {
-      type: Number,
+    upozilla: {
+      type:  String,
+      //  required: true,
+    },
+    zilla: {
+      type: String,
       //  required: true,
     },
     phoneNo: {

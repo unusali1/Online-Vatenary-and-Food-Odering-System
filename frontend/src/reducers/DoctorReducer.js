@@ -1,4 +1,4 @@
-import { ALL_DOCTORS_FAIL, ALL_DOCTORS_REQUEST, ALL_DOCTORS_SUCCESS, CLEAR_ERRORS, DOCTOR_DETAILS_REQUEST, DOCTOR_DETAILS_SUCCESS, DOCTOR_DETAILS_FAIL, DELETE_DOCTOR_REQUEST, DELETE_DOCTOR_SUCCESS, DELETE_DOCTOR_FAIL, DELETE_DOCTOR_RESET, ADMIN_DOCTOR_REQUEST, ADMIN_DOCTOR_SUCCESS, ADMIN_DOCTOR_FAIL } from "../constants/DoctorConstants";
+import { ALL_DOCTORS_FAIL, ALL_DOCTORS_REQUEST, ALL_DOCTORS_SUCCESS, CLEAR_ERRORS, DOCTOR_DETAILS_REQUEST, DOCTOR_DETAILS_SUCCESS, DOCTOR_DETAILS_FAIL, DELETE_DOCTOR_REQUEST, DELETE_DOCTOR_SUCCESS, DELETE_DOCTOR_FAIL, DELETE_DOCTOR_RESET, ADMIN_DOCTOR_REQUEST, ADMIN_DOCTOR_SUCCESS, ADMIN_DOCTOR_FAIL, NEW_DOCTOR_REQUEST, NEW_DOCTOR_SUCCESS, NEW_DOCTOR_FAIL, NEW_DOCTOR_RESET, UPDATE_DOCTOR_REQUEST, UPDATE_DOCTOR_SUCCESS, UPDATE_DOCTOR_FAIL, UPDATE_DOCTOR_RESET } from "../constants/DoctorConstants";
 
 export const doctorsReducer = (state = { doctors: [] }, action) => {
   switch (action.type) {
@@ -69,10 +69,11 @@ export const doctorsReducer = (state = { doctors: [] }, action) => {
   };
 
   // Delete Doctor
+
   export const deleteDoctorReducer = (state = {}, action) => {
     switch (action.type) {
       case DELETE_DOCTOR_REQUEST:
-     
+      case UPDATE_DOCTOR_REQUEST:
         return {
           ...state,
           loading: true,
@@ -84,9 +85,14 @@ export const doctorsReducer = (state = { doctors: [] }, action) => {
           isDeleted: action.payload,
         };
   
-     
+      case UPDATE_DOCTOR_SUCCESS:
+        return {
+          ...state,
+          loading: false,
+          isUpdated: action.payload,
+        };
       case DELETE_DOCTOR_FAIL:
-    
+      case UPDATE_DOCTOR_FAIL:
         return {
           ...state,
           loading: false,
@@ -97,7 +103,47 @@ export const doctorsReducer = (state = { doctors: [] }, action) => {
           ...state,
           isDeleted: false,
         };
-     
+      case UPDATE_DOCTOR_RESET:
+        return {
+          ...state,
+          isUpdated: false,
+        };
+      case CLEAR_ERRORS:
+        return {
+          ...state,
+          error: null,
+        };
+      default:
+        return state;
+    }
+  };
+
+
+  // New Doctor ----Admin
+  export const newDoctorReducer = (state = { doctor: {} }, action) => {
+    switch (action.type) {
+      case NEW_DOCTOR_REQUEST:
+        return {
+          ...state,
+          loading: true,
+        };
+      case NEW_DOCTOR_SUCCESS:
+        return {
+          loading: false,
+          success: action.payload.success,
+          product: action.payload.product,
+        };
+      case NEW_DOCTOR_FAIL:
+        return {
+          ...state,
+          loading: false,
+          error: action.payload,
+        };
+      case NEW_DOCTOR_RESET:
+        return {
+          ...state,
+          success: false,
+        };
       case CLEAR_ERRORS:
         return {
           ...state,

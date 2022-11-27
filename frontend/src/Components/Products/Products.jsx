@@ -80,7 +80,7 @@ const Products = ( ) => {
               color: "rgb(0, 0, 0, 0.7)",
             }}
           >
-            Featured Products
+           Products
           </h2>
            
             <div className="sidebar__product" style={{

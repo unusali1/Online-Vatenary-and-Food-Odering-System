@@ -56,7 +56,7 @@ const MyAppointment = () => {
       sortable: false,
       renderCell: (params) => {
         return (
-          <Link to={`/apointment/${params.getValue(params.id, "id")}`}>
+          <Link to={`/appointment/${params.getValue(params.id, "id")}`}>
             <LaunchIcon />
           </Link>
         );

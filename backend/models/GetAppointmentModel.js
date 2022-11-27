@@ -1,7 +1,17 @@
 const mongoose = require("mongoose");
 
 const getAppointmentSchema = new mongoose.Schema({
-  animalInfo: {
+  Date: {
+    date: {
+      type: String,
+      default: new Date().toISOString().split('T')[0]
+    },
+    time: {
+      type: String,
+      
+    },
+  },
+  AnimalInfo: {
     address: {
       type: String,
       //required: true,
@@ -16,11 +26,13 @@ const getAppointmentSchema = new mongoose.Schema({
     },
     age: {
       type: Number,
-
     },
-
-    phoneNo: {
+   phone: {
       type: Number,
+      //  required: true,
+    },
+    image: {
+      type: String,
       //  required: true,
     },
   },
@@ -44,6 +56,10 @@ const getAppointmentSchema = new mongoose.Schema({
       },
       stock: {
         type: Number,
+        //required: true,
+      },
+      location: {
+        type: String,
         //required: true,
       },
       doctorId: {

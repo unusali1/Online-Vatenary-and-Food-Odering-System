@@ -98,6 +98,7 @@ const CreateMedicine = () => {
     "Dog Medicine",
     "Fish Medicine",
     "Chicken Medicine",
+    "Veccines",
   ];
 
 
@@ -113,7 +114,7 @@ const CreateMedicine = () => {
             encType="multipart/form-data"
             onSubmit={createProductSubmitHandler}
           >
-            <h1>Create Food</h1>
+            <h1>Create Medicine</h1>
 
             <div>
               <SpellcheckIcon />

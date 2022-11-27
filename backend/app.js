@@ -21,6 +21,7 @@ const medicine = require("./routes/MedicineRoute");
 const user = require("./routes/UserRoute");
 const doctor = require("./routes/DoctorRoute");
 const order = require("./routes/OrderRoute");
+const medicineorder = require("./routes/MedicineOrderRoute");
 const payment = require("./routes/PaymentRoute");
 const cart = require("./routes/CartRoute");
 const appointment = require("./routes/GetAppointmentRoute");
@@ -33,6 +34,7 @@ app.use("/api/v2", cart);
 app.use("/api/v2", order);
 app.use("/api/v2", appointment);
 app.use("/api/v2", payment);
+app.use("/api/v2", medicineorder);
 
 app.use(express.static(path.join(__dirname, "../frontend/build")));
 

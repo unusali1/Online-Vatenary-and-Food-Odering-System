@@ -25,8 +25,7 @@ const dispatch = useDispatch();
 const { error, doctors } = useSelector((state) => state.doctors);
 
 const { error: deleteError, isDeleted } = useSelector(
-    (state) => state.deleteDoctor
-  );
+    (state) => state.deleteDoctor);
 
   const deleteProductHandler = (id) => {
     dispatch(deleteDoctor(id));
@@ -85,7 +84,7 @@ const columns = [
       renderCell: (params) => {
         return (
           <Fragment>
-            <Link to={`/edit/product/${params.getValue(params.id, "id")}`}>
+            <Link to={`/edit/doctor/${params.getValue(params.id, "id")}`}>
               <EditIcon />
             </Link>
 
@@ -115,7 +114,7 @@ const columns = [
 
     return (
        <Fragment>
-      <MetaData title={`ALL PRODUCTS - Admin`} />
+      <MetaData title={`ALL Doctors - Admin`} />
 
       <div className="dashboard">
         <SideBar />

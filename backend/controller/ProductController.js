@@ -20,7 +20,7 @@ exports.createProduct = catchAsyncError(async(req,res,next) => {
 
 //get All products
 exports.getAllProducts =catchAsyncError(async(req,res)=>{
-    const resultPerPage=8;
+    const resultPerPage=12;
     const productsCount= await Product.countDocuments();
     const feature = new Features(Product.find(),req.query).search().filter().pagination(resultPerPage);
     const products = await feature.query;
@@ -136,7 +136,7 @@ exports.createProductReview = catchAsyncError(async (req, res, next) => {
   
   // Get All reviews of a single product
   exports.getSingleProductReviews = catchAsyncError(async (req, res, next) => {
-    const product = await Product.findById(req.params.id);
+    const product = await Product.findById(req.query.id);
   
     if (!product) {
       return next(new ErrorHandler("Product is not found with this id", 404));
@@ -166,22 +166,22 @@ exports.createProductReview = catchAsyncError(async (req, res, next) => {
       avg += rev.rating;
     });
   
-    let rating = 0;
+    let ratings = 0;
   
     if (reviews.length === 0) {
-      rating = 0;
+      ratings = 0;
     } else {
-      rating = avg / reviews.length;
+      ratings = avg / reviews.length;
     }
   
-    const numofReviews = reviews.length;
+    const numOfReviews = reviews.length;
   
     await Product.findByIdAndUpdate(
       req.query.productId,
       {
         reviews,
-        rating,
-        numofReviews,
+        ratings,
+        numOfReviews,
       },
       {
         new: true,

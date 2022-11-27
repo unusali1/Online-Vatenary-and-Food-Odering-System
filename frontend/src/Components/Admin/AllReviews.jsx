@@ -14,8 +14,10 @@ import Star from "@material-ui/icons/Star";
 import SideBar from "./Sidebar";
 import { DELETE_REVIEW_RESET } from "../../constants/ProductConstans";
 import { ToastContainer, toast } from 'react-toastify';
+import { useNavigate } from "react-router-dom";
 
-const AllReviews = ({ history }) => {
+const AllReviews = () => {
+  const navigate =useNavigate();
   const dispatch = useDispatch();
 
   const { error: deleteError, isDeleted } = useSelector(
@@ -53,10 +55,10 @@ const AllReviews = ({ history }) => {
 
     if (isDeleted) {
       toast.success("Review Deleted Successfully");
-      history.push("/admin/reviews");
+      navigate("/admin/reviews");
       dispatch({ type: DELETE_REVIEW_RESET });
     }
-  }, [dispatch, error, deleteError, history, isDeleted, productId]);
+  }, [dispatch, error, deleteError, navigate, isDeleted, productId]);
 
   const columns = [
     { field: "id", headerName: "Review ID", minWidth: 200, flex: 0.5 },

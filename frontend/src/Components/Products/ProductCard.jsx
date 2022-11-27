@@ -4,7 +4,7 @@ import { Rating } from "@material-ui/lab";
 import "./ProductCard.css";
 const ProductCard = ({ product }) => {
   const options = {
-    value: product.ratings,
+    value: product.rating,
     readOnly: true,
     precision: 0.5,
   };
@@ -20,7 +20,7 @@ const ProductCard = ({ product }) => {
             <p className="productName">{product.name}</p>
             <div>
             <Rating {...options} />
-              <span>({product.numOfReviews} Reviews)</span>
+              <span>({product.numofReviews} Reviews)</span>
             </div>
             <div
               style={{

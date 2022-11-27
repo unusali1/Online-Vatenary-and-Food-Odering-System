@@ -34,6 +34,7 @@ export const createOrder = (order) => async (dispatch) => {
     const { data } = await axios.post("/api/v2/order/new", order, config);
 
     dispatch({ type: CREATE_ORDER_SUCCESS, payload: data });
+    
   } catch (error) {
     dispatch({
       type: CREATE_ORDER_FAIL,

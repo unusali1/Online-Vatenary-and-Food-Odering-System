@@ -4,7 +4,6 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import webFont from "webfontloader";
 import { loadUser } from './actions/userAction.js';
 import "./App.css";
-import LoginSignup from './Components/Authentication/LoginSignup.jsx';
 import Header from './Components/Home/Header.jsx';
 import Home from './Components/Home/Home.jsx';
 import ProductDetails from "./Components/Products/ProductDetails";
@@ -36,12 +35,11 @@ import CreateProduct from './Components/Admin/CreateProduct.jsx';
 import Dashboard from './Components/Admin/Dashboard.jsx';
 import EditMedicine from './Components/Admin/EditMedicine.jsx';
 import EditProduct from './Components/Admin/EditProduct.jsx';
+import EditDoctor from './Components/Admin/EditDoctor.jsx';
 import UpdateOrder from './Components/Admin/UpdateOrder.jsx';
 import UpdateUser from './Components/Admin/UpdateUser.jsx';
 import Animalinfo from './Components/Apointment/Animalinfo.js';
 import Appointment from "./Components/Apointment/Appointment.js";
-import Registration from './Components/Authentication/Registration.jsx';
-import SignUp from './Components/Authentication/SignUp.jsx';
 import CartMedicine from './Components/cart/CartMedicine.jsx';
 import ConfirmOrder from './Components/cart/ConfirmOrder.jsx';
 import Payment from './Components/cart/Payment.jsx';
@@ -66,6 +64,12 @@ import AllAppointment from './Components/Admin/AllApointments.jsx';
 import MyOrderDetails from './Components/User/MyOrderDetails.jsx';
 import MyAppointment from './Components/User/MyAppointment.jsx';
 import MyAppointmentDetails from './Components/User/MyAppointmentDetails.jsx';
+import Date from './Components/Apointment/Date.js';
+import AddDoctor from './Components/Admin/AddDoctor.jsx';
+
+import Signup from "./Components/Authentication/Singup/SignUp.jsx";
+import Login from "./Components/Authentication/Login/Login.jsx";
+// import EmailVerify from "./Components/Authentication/EmailVerify/EmailVerify.jsx";
 
 const App = () => {
 
@@ -106,15 +110,14 @@ const App = () => {
         <Route path="/password/reset/:token" element={< ResetPassword />} />
         <Route path="/more" element={< MoreOption />} />
         <Route path="/cart" element={< Cart />} />
-        <Route path="/login" element={< LoginSignup />} />
-        <Route path="/registration" element={< Registration />} />
+        <Route path="/login" element={< Login />} />
+        <Route path="/signup" element={< Signup />} />
         <Route path="/doctorcart" element={< Appointment />} />
         <Route path="/doctors" element={< Doctors />} />
         <Route path="/doctor/:id" element={< DoctorDetails />} />
         <Route path="/cartmedi" element={< CartMedicine />} />
         <Route path="/contact" element={< Contact />} />
         <Route path="/faq" element={< Rules />} />
-        <Route path="/singnup" element={< SignUp />} />
         <Route path="/products" element={< Products />} />
         <Route path="/search" element={< Search />} />
         <Route path="/products/:keyword" element={<Products />} />
@@ -154,6 +157,24 @@ const App = () => {
           element={
             <ProtectedRoute isAuthenticated={isAuthenticated} isAdmin={true}>
               <AllDoctors />
+            </ProtectedRoute>
+          }
+        />
+
+         <Route
+          path="/admin/createdoctor"
+          element={
+            <ProtectedRoute isAuthenticated={isAuthenticated} isAdmin={true}>
+              < AddDoctor />
+            </ProtectedRoute>
+          }
+        />
+        
+        <Route
+          path="/date"
+          element={
+            <ProtectedRoute isAuthenticated={isAuthenticated} >
+              < Date />
             </ProtectedRoute>
           }
         />
@@ -328,6 +349,16 @@ const App = () => {
             </ProtectedRoute>
           }
         />
+
+         <Route
+          path="/edit/doctor/:id"
+          element={
+            <ProtectedRoute isAuthenticated={isAuthenticated} isAdmin={true} >
+              < EditDoctor  />
+            </ProtectedRoute>
+          }
+        />
+
 
         <Route
           path="/admin/orders"

@@ -5,7 +5,11 @@ import CheckoutAppointment from "./CheckoutAppoinment.js";
 import MetaData from "../../more/Metadata";
 import HomeIcon from "@material-ui/icons/Home";
 import PhoneIcon from "@material-ui/icons/Phone";
+import DriveFileRenameOutlineIcon from '@mui/icons-material/DriveFileRenameOutline';
+import SyncProblemIcon from '@mui/icons-material/SyncProblem';
+import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import { saveAnimalInfo } from "../../actions/AppointmentAction";
+import { Button } from "@material-ui/core";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useNavigate } from "react-router-dom";
@@ -14,26 +18,61 @@ const Animalinfo = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
-  const { AimalInfo } = useSelector((state) => state.doctorCart);
+  const { AnimalInfo } = useSelector((state) => state.doctorCart);
 
-  const [address, setAddress] = useState(AimalInfo.address);
-  // eslint-disable-next-line
-  const [animal, setAnimal] = useState(AimalInfo.animal);
-  const [problem, setProblem] = useState(AimalInfo.problem);
-  const [age, setAge] = useState(AimalInfo.age);
-  // const [date, setDate] = useState(AimalInfo.date);
-  // const [time, setTime] = useState(AimalInfo.time);
-  // eslint-disable-next-line
-  const [phoneNo, setPhoneNo] = useState(AimalInfo.phoneNo);
+  const [address, setAddress] = useState(AnimalInfo.address);
+  const [animal, setAnimal] = useState(AnimalInfo.animal);
+  const [problem, setProblem] = useState(AnimalInfo.problem);
+  const [age, setAge] = useState(AnimalInfo.age);
+  const [phone, setPhone] = useState(AnimalInfo.phoneNo);
 
-  const shippingSubmit = (e) => {
+  const [image, setImage] = useState(AnimalInfo.image);
+  const [upladingImg, setUploadingImg] = useState(false);
+
+  function validateImg(e) {
+    const file = e.target.files[0];
+    if (file.size >= 1048576) {
+      return alert("Max file size is 5mb");
+    } else {
+      setImage(file);
+     
+    }
+  }
+
+
+  async function uploadImage() {
+    const data = new FormData();
+    data.append("file", image);
+    data.append("upload_preset", "lt2tb7ci");
+    try {
+      setUploadingImg(true);
+      let res = await fetch("https://api.cloudinary.com/v1_1/dddvfrdb1/image/upload", {
+        method: "post",
+        body: data,
+      });
+      const urlData = await res.json();
+      setUploadingImg(false);
+      return urlData.url;
+    } catch (error) {
+      setUploadingImg(false);
+      console.log(error);
+    }
+  }
+
+
+
+  const shippingSubmit = async(e) => {
     e.preventDefault();
 
-    if (phoneNo.length < 11 || phoneNo.length > 11) {
+    if (phone.length < 11 || phone.length > 11) {
       toast.error("Phone Number should be 11digits");
       return;
     }
-    dispatch(saveAnimalInfo({ address,animal,problem,age,phoneNo }));
+
+    if (!image) return alert("Please upload your profile picture");
+    const url = await uploadImage(image);
+    
+    dispatch(saveAnimalInfo({ address,animal,problem,age,phone ,image: url }));
     navigate("/appointment/confirm");
   };
 
@@ -41,7 +80,7 @@ const Animalinfo = () => {
     <>
       <MetaData title="Animal Details" />
 
-      <CheckoutAppointment activeStep={0} />
+      <CheckoutAppointment activeStep={1} />
 
       <div className="shippingContainer">
         <div className="shippingBoxx">
@@ -52,6 +91,7 @@ const Animalinfo = () => {
             encType="multipart/form-data"
             onSubmit={shippingSubmit}
           >
+           
             <div>
               <HomeIcon />
               <input
@@ -64,7 +104,7 @@ const Animalinfo = () => {
             </div>
 
             <div>
-              <HomeIcon />
+              <DriveFileRenameOutlineIcon />
               <input
                 type="text"
                 placeholder="Animal Name"
@@ -75,7 +115,7 @@ const Animalinfo = () => {
             </div>
 
             <div>
-              <HomeIcon />
+              <SyncProblemIcon/>
               <input
                 type="text"
                 placeholder="Animal Problem"
@@ -85,8 +125,12 @@ const Animalinfo = () => {
               />
             </div>
 
+            <div id="createProductFormFile">
+              <input type="file" id="image-upload" hidden accept="image/png, image/jpeg" onChange={validateImg} />
+            </div>
+
             <div>
-              <HomeIcon />
+              <CalendarMonthIcon />
               <input
                 type="number"
                 placeholder="Animal Age"
@@ -96,27 +140,7 @@ const Animalinfo = () => {
               />
             </div>
 
-            {/* <div>
-              <HomeIcon />
-              <input
-                type="date"
-                placeholder="Appointment Date"
-                required
-                value={date}
-                onChange={(e) => setDate(e.target.value)}
-              />
-            </div>
-
-            <div>
-              <HomeIcon />
-              <input
-                type="time"
-                placeholder="Appointment Time"
-                required
-                value={time}
-                onChange={(e) => setTime(e.target.value)}
-              />
-            </div> */}
+          
 
             <div>
               <PhoneIcon />
@@ -124,17 +148,14 @@ const Animalinfo = () => {
                 type="number"
                 placeholder="Phone Number"
                 required
-                value={phoneNo}
-                onChange={(e) => setPhoneNo(e.target.value)}
+                value={phone}
+                onChange={(e) => setPhone(e.target.value)}
                 size="10"
               />
             </div>
-            <input
-              type="submit"
-              value="Continue"
-              className="shippingBtn"
-             
-            />
+            <Button id="createProductBtn" type="submit">
+              {upladingImg ||  "Continue"}
+            </Button>
           </form>
         </div>
       </div>

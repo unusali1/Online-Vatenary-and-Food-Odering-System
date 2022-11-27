@@ -2,10 +2,11 @@ import {
     ADD_TO_APOINTMENT,
     REMOVE_APPOINTMENT_DOCTOR,
     SAVE_ANIMAL_INFO,
+    SAVE_APPOINTMENT_DATE,
   } from "../constants/AppointmentConstans";
   
   export const doctorReducer = (
-    state = { doctorAppoin: [], AimalInfo: {} },
+    state = { doctorAppoin: [], AnimalInfo: {}, Date: {} },
     action
   ) => {
     switch (action.type) {
@@ -35,11 +36,17 @@ import {
           ...state,
           doctorAppoin: state.doctorAppoin.filter((i) => i.doctor !== action.payload),
         };
-  
+     
+        case SAVE_APPOINTMENT_DATE:
+          return {
+            ...state,
+            Date: action.payload,
+          };
+
       case SAVE_ANIMAL_INFO:
         return {
           ...state,
-          AimalInfo: action.payload,
+          AnimalInfo: action.payload,
         };
   
       default:

@@ -84,12 +84,39 @@ const UpdateOrder = () => {
                       </span>
                     </div>
                     <div>
-                      <p>Address:</p>
-                      <span>
-                        {order.shippingInfo &&
-                          `${order.shippingInfo.address}, ${order.shippingInfo.state}`}
-                      </span>
-                    </div>
+                  <p>Zilla:</p>
+                  <span>
+                    {order.shippingInfo && order.shippingInfo.zilla}
+                  </span>
+                </div>
+
+                <div>
+                  <p>Upozilla:</p>
+                  <span>
+                    {order.shippingInfo && order.shippingInfo.upozilla}
+                  </span>
+                </div>
+
+                <div>
+                  <p>Post Office:</p>
+                  <span>
+                    {order.shippingInfo && order.shippingInfo.postoffce}
+                  </span>
+                </div>
+
+                <div>
+                  <p>Road No:</p>
+                  <span>
+                    {order.shippingInfo && order.shippingInfo.road}
+                  </span>
+                </div>
+
+                <div>
+                  <p>House No:</p>
+                  <span>
+                    {order.shippingInfo && order.shippingInfo.house}
+                  </span>
+                </div>
                   </div>
 
                   <Typography>Payment</Typography>

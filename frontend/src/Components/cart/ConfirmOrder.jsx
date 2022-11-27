@@ -22,11 +22,11 @@ const ConfirmOrder = ({ history }) => {
 
     const subtotal = productPrice 
       // eslint-disable-next-line
-    const shippingCharges = productPrice > 99 ? 0 : 50;
+    const shippingCharges = productPrice > 2000 ? 0 : 200;
     
     const totalPrice = subtotal + shippingCharges;
   
-    const address = `${shippingInfo.address}, ${shippingInfo.state}, ${shippingInfo.country}`;
+    const address = `${shippingInfo.village}, ${shippingInfo.road}, ${shippingInfo.house}`;
   
     const proceedToPayment = () => {
       const data = {
@@ -54,11 +54,19 @@ const ConfirmOrder = ({ history }) => {
                   <span>{user.name}</span>
                 </div>
                 <div>
-                  <p>Phone:</p>
-                  <span>{shippingInfo.phoneNo}</span>
+                  <p>Zilla :</p>
+                  <span>{shippingInfo.zilla}</span>
                 </div>
                 <div>
-                  <p>Address:</p>
+                  <p>Upozilla :</p>
+                  <span>{shippingInfo.upozilla}</span>
+                </div>
+                <div>
+                  <p>Poast Office :</p>
+                  <span>{shippingInfo.postoffce}</span>
+                </div>
+                <div>
+                  <p>Address :</p>
                   <span>{address}</span>
                 </div>
               </div>

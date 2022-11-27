@@ -49,7 +49,10 @@ button.Home__button {
   padding: 1vmax;
   font-size: 1.4vmax;
   margin: 5vmax auto;
-  color: rgb(0, 0, 0, 0.7);
+  background: orange;
+  color:#fff;
+  padding:.5rem 3rem;
+  clip-path: polygon(100% 0, 93% 50%, 100% 99%, 0% 100%, 7% 50%, 0% 0%);
 }
 .container {
   display: flex;

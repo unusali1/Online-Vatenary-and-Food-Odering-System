@@ -22,6 +22,7 @@ const categories = [
   "Dog Medicine",
   "Fish Medicine",
   "Chicken Medicine",
+  "Veccines",
 ]
 
 const Medicines = ( ) => {

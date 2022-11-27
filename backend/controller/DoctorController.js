@@ -1,41 +1,18 @@
 const Doctor =require("../models/DoctorModel.js");
 const ErrorHandler = require("../utils/ErrorHandler.js");
 const catchAsyncError = require("../middleware/catchAsyncError");
-const sendToken = require("../utils/jwtToken.js");
-const sendMail = require("../utils/sendMail.js");
-const crypto =require("crypto");
 const Features = require("../utils/Features.js");
-const upload =require("../conectCloudinary/multer");
-const cloudinary = require("../conectCloudinary/cluodinary");
+
 
 
 // Register Doctor
 exports.createDoctor = catchAsyncError(async (req, res, next) => {
-  try {
-    // Upload image to cloudinary
-    const result = await cloudinary.uploader.upload(req.file.path);
+  const doctor = await Doctor.create(req.body);
 
-    // Create new doctor
-    let doctor = new Doctor({
-      name: req.body.name,
-      email: req.body.email,
-      password: req.body.password,
-      degree: req.body.degree,
-      university: req.body.university,
-      registration: req.body.registration,
-      location: req.body.location,
-      category: req.body.category,
-      avatar: result.secure_url,
-      cloudinary_id: result.public_id,
-    });
-    // Save doctor
-    await doctor.save();
-    //res.json(doctor);
-    sendToken(doctor, 201, res);
-
-  } catch (err) {
-    console.log(err);
-  }
+  res.status(201).json({
+    success: true,
+    doctor
+  })
 });
 
 
@@ -75,6 +52,7 @@ exports.updatDoctor = catchAsyncError(async(req,res,next) => {
     message: 'Doctor not found in the database'
   })
  }
+
 
  doctor = await Doctor.findByIdAndUpdate(req.params.id, req.body ,{
   new: true,

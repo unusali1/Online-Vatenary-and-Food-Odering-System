@@ -112,7 +112,7 @@ const CreateProduct = () => {
             encType="multipart/form-data"
             onSubmit={createProductSubmitHandler}
           >
-            <h1>Create Food</h1>
+            <h1>Create Product</h1>
 
             <div>
               <SpellcheckIcon />

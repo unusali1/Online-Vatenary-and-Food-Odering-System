@@ -13,6 +13,7 @@ import Footer from "../Footer/Footer";
 import Bounce from 'react-reveal/Bounce';
 
 
+
 const Home = () => {
 
 
@@ -29,6 +30,7 @@ const Home = () => {
 
     return (
         <div className="home-container">
+           
             <div className="home-section">
                 <MetaData title="Home" />
 

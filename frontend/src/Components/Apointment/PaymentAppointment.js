@@ -31,7 +31,7 @@ const Payment = () => {
   const elements = useElements();
   const payBtn = useRef(null);
 
-  const {AimalInfo, doctorAppoin } = useSelector((state) => state.doctorCart);
+  const {Date, AnimalInfo, doctorAppoin } = useSelector((state) => state.doctorCart);
   const { user } = useSelector((state) => state.user);
   const { error,loading } = useSelector((state) => state.appointment);
 
@@ -40,8 +40,8 @@ const Payment = () => {
   };
    
   const appointment = {
-
-    AimalInfo,
+    Date,
+    AnimalInfo,
     getDoctor: doctorAppoin,
     itemsPrice: appointmentInfo.subtotal,
     totalPrice: appointmentInfo.totalPrice,
@@ -76,7 +76,11 @@ const Payment = () => {
             email: user.email,
             address: {
               line1: Animalinfo.address,
-             
+              animal: Animalinfo.animal,
+              problem: Animalinfo.problem,
+              age: Animalinfo.age,
+              phoneNo: Animalinfo.phoneNo
+
             },
           },
         },
@@ -120,7 +124,7 @@ const Payment = () => {
    ) : (
     <>
     <MetaData title="Payment" />
-    <CheckoutAppointment activeStep={2} />
+    <CheckoutAppointment activeStep={3} />
     <div className="paymentContainer">
       <form className="paymentForm" onSubmit={(e) => submitHandler(e)}>
         <Typography>Card Info</Typography>
@@ -139,7 +143,7 @@ const Payment = () => {
 
         <input
           type="submit"
-          value={`Pay - $ ${appointmentInfo && appointmentInfo.totalPrice}`}
+          value={`Pay -  ৳ ${appointmentInfo && appointmentInfo.totalPrice}`}
           ref={payBtn}
           className="paymentFormBtn"
         />

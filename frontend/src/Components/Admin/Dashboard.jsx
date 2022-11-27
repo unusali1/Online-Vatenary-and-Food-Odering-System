@@ -92,7 +92,7 @@ const { users } = useSelector((state) => state.allUsers);
           <div className="dashboardSummary">
             <div>
               <p>
-                Total Amount <br />  ${totalAmount}  
+                Total Amount <br />  ৳ {totalAmount}  
               </p>
             </div>
             <div className="dashboardSummaryBox2">

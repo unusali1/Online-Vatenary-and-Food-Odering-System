@@ -9,6 +9,10 @@ import "./CheckoutAppointment.css";
 const CheckoutSteps = ({ activeStep }) => {
   const steps = [
     {
+      label: <Typography>Date</Typography>,
+      icon: <PetsIcon />,
+    },
+    {
       label: <Typography>Animal Details</Typography>,
       icon: <PetsIcon />,
     },

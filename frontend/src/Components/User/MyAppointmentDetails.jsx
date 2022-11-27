@@ -1,5 +1,6 @@
-import React, { useEffect } from "react";
-import "./orderDetails.css";
+import React, { useEffect, useRef } from "react";
+import { useReactToPrint } from "react-to-print";
+import "./MyAppointmentDetail.css";
 import { useSelector, useDispatch } from "react-redux";
 import MetaData from "../../more/Metadata";
 import { Link, useParams } from "react-router-dom";
@@ -9,7 +10,8 @@ import Loading from "../../more/Loader";
 
 
 const MyAppointmentDetails = () => {
-  const { appointment, error, loading } = useSelector((state) => console.log(state));
+  const componentRef = useRef();
+  const { appointment, error, loading } = useSelector((state) => state.myappointmentdetails);
 
   const dispatch = useDispatch();
 
@@ -22,7 +24,12 @@ const MyAppointmentDetails = () => {
     }
 
     dispatch(getGetAppointmentDetails(id));
-  }, [dispatch,  error, id]);
+  }, [dispatch, alert, error, id]);
+
+  const handlePrint = useReactToPrint({
+    content: () => componentRef.current,
+  });
+
   return (
     <>
       {loading ? (
@@ -30,35 +37,72 @@ const MyAppointmentDetails = () => {
       ) : (
         <>
           <MetaData title="Appointment Details" />
-          <div className="orderDetailsPage">
-            <div className="orderDetailsContainer">
+          <div>
+         
+          <div className="orderDetailsPagee" ref={componentRef}>
+            <div className="orderDetailsContainerr">
               <Typography component="h1">
-              appointment #{appointment && appointment._id}
+              Appointment #{appointment && appointment._id}
               </Typography>
-              <Typography>Animal Info</Typography>
+              <Typography>Appointment Info</Typography>
               <div className="orderDetailsContainerBox">
-                <div>
-                  <p>Name:</p>
-                  <span>{appointment.user && appointment.user.name}</span>
-                </div>
-                <div>
-                  <p>Phone:</p>
-                  <span>
-                    {appointment.AnimalInfo && appointment.AnimalInfo.phoneNo}
-                  </span>
-                </div>
-                <div>
-                  <p>Address:</p>
-                  <span>
-                    {appointment.AnimalInfo &&
-                      `${appointment.AnimalInfo.address}`}
-                  </span>
-                </div>
+              <table className="aptable">
+                         <tbody className="tbody">
+                           
+                           <tr className="trow">
+                            <td className="tdb">Appointment Date:</td>
+                            <td className="tdb">{appointment.Date && appointment.Date.date}</td>
+                           </tr>
+                          
+                           
+                           <tr className="trow">
+                            <td className="tdb">User Name:</td>
+                            <td className="tdb">{appointment.user && appointment.user.name}</td>
+                           </tr>
+                          
+                           
+                           <tr className="trow">
+                            <td className="tdb">Animal Name:</td>
+                            <td className="tdb">{appointment.AnimalInfo && appointment.AnimalInfo.animal}</td>
+                           </tr>
+                           
+                           
+                           <tr className="trow">
+                            <td className="tdb">Animal Problem:</td>
+                            <td className="tdb"> {appointment.AnimalInfo && appointment.AnimalInfo.problem}</td>
+                           </tr>
+
+                           <tr className="trow">
+                            <td className="tdb">Animal image:</td>
+                            <td className="tdb">   <img className="tdbimg" src={appointment.AnimalInfo && appointment.AnimalInfo.image} /></td>
+                           </tr>
+                           
+                           <tr className="trow">
+                            <td className="tdb">Animal Age:</td>
+                            <td className="tdb">{appointment.AnimalInfo && appointment.AnimalInfo.age}</td>
+                           </tr>
+
+                           <tr className="trow">
+                            <td className="tdb">Phone:</td>
+                            <td className="tdb">{appointment.AnimalInfo && appointment.AnimalInfo.phone}</td>
+                           </tr>
+
+                           <tr className="trow">
+                            <td className="tdb">Address :</td>
+                            <td className="tdb">{appointment.AnimalInfo && appointment.AnimalInfo.address}</td>
+                           </tr>
+                         
+                         </tbody>
+                    </table>
+
+                    <div>
+                    
+                    </div>
               </div>
               <Typography>Payment</Typography>
               <div className="orderDetailsContainerBox">
                 <div>
-                 
+                
                   <p style={{
                       color:"green"
                   }}>
@@ -68,38 +112,34 @@ const MyAppointmentDetails = () => {
 
                 <div>
                   <p>Amount:</p>
-                  <span>$ {appointment.totalPrice && appointment.totalPrice}</span>
+                  <span>৳ {appointment.totalPrice && appointment.totalPrice}</span>
                 </div>
               </div>
 
-              <Typography>Order Status</Typography>
-              {/* <div className="orderDetailsContainerBox">
-                <div>
-                  <p
-                    className={
-                      order.orderStatus && order.orderStatus === "Delivered"
-                        ? "greenColor"
-                        : "redColor"
-                    }
-                  >
-                    {order.orderStatus && order.orderStatus}
-                  </p>
-                </div>
-              </div> */}
+            
             </div>
 
-            <div className="orderDetailsCartItems">
-              <Typography>Appointment Doctor:</Typography>
-              <div className="orderDetailsCartItemsContainer">
+            <div className="orderDetailsCartItemss">
+              <Typography>Doctor :</Typography>
+              <div className="orderDetailsCartItemsContainerr">
 
                 {appointment.getDoctor &&
-                 appointment.getDoctor.map((item) => (
-                    <div key={item.Offer}>
+                  appointment.getDoctor.map((item) => (
+                    <div key={item.price}>
                       <img src={item.image} alt="Product" />
-                     
+                       <Link to="#">
+                        {item.name}
+                      </Link>{" "}
+                      
                       <span>
-                        ${item.price} ={" "}
-                        <b>${item.price }</b>
+                         
+                         <b>Location: {item.location}</b>
+                       </span>
+                      
+                      
+                      <span>
+                         
+                        <b>Fee: ৳{item.price}</b>
                       </span>
                     </div>
                   ))}
@@ -108,11 +148,14 @@ const MyAppointmentDetails = () => {
               </div>
             </div>
           </div>
+
+          <button onClick={handlePrint} className="print__button">  Print Appointment </button>
+          </div>
         </>
       )}
-      
+     
     </>
   );
 };
 
-export default MyAppointmentDetails;
+export default  MyAppointmentDetails;

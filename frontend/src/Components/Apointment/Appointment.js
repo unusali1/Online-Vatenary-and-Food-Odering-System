@@ -43,7 +43,7 @@ const Appointment = () => {
   };
 
   const checkoutHandler = () => {
-    navigate("/animalinfo");
+    navigate("/date");
   };
 
   return (

@@ -89,7 +89,7 @@ const  AllAppointment = () => {
       renderCell: (params) => {
         return (
           <Fragment>
-            <Link to={`/admin/apointment/${params.getValue(params.id, "id")}`}>
+            <Link to={`/appointment/${params.getValue(params.id, "id")}`}>
               <EditIcon />
             </Link>
 

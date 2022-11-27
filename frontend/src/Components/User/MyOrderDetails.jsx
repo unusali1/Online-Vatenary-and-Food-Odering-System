@@ -47,13 +47,43 @@ const MyOrderDetails = () => {
                     {order.shippingInfo && order.shippingInfo.phoneNo}
                   </span>
                 </div>
+
                 <div>
-                  <p>Address:</p>
+                  <p>Zilla:</p>
                   <span>
-                    {order.shippingInfo &&
-                      `${order.shippingInfo.address}, ${order.shippingInfo.state}`}
+                    {order.shippingInfo && order.shippingInfo.zilla}
                   </span>
                 </div>
+
+                <div>
+                  <p>Upozilla:</p>
+                  <span>
+                    {order.shippingInfo && order.shippingInfo.upozilla}
+                  </span>
+                </div>
+
+                <div>
+                  <p>Post Office:</p>
+                  <span>
+                    {order.shippingInfo && order.shippingInfo.postoffce}
+                  </span>
+                </div>
+
+                <div>
+                  <p>Road No:</p>
+                  <span>
+                    {order.shippingInfo && order.shippingInfo.road}
+                  </span>
+                </div>
+
+                <div>
+                  <p>House No:</p>
+                  <span>
+                    {order.shippingInfo && order.shippingInfo.house}
+                  </span>
+                </div>
+
+                
               </div>
               <Typography>Payment</Typography>
               <div className="orderDetailsContainerBox">

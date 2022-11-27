@@ -6,16 +6,24 @@ const sendMail = require("../utils/sendMail.js");
 const crypto =require("crypto");
 const upload =require("../conectCloudinary/multer");
 const cloudinary = require("../conectCloudinary/cluodinary");
+const bcrypt = require('bcryptjs');
 
 
 // Register user
 exports.createUser = catchAsyncError(async (req, res, next) => {
   try {
+
+    let user = await User.findOne({ email });
+    if (user) {
+      return res
+        .status(400)
+        .json({ success: false, message: "User already exists" });
+    }
     // Upload image to cloudinary
     const result = await cloudinary.uploader.upload(req.file.path);
 
     // Create new user
-    let user = new User({
+     user = new User({
       name: req.body.name,
       email: req.body.email,
       password: req.body.password,
@@ -27,8 +35,11 @@ exports.createUser = catchAsyncError(async (req, res, next) => {
     //res.json(user);
     sendToken(user, 201, res);
 
-  } catch (err) {
-    console.log(err);
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: error.message,
+    });
   }
 });
 
@@ -47,10 +58,11 @@ exports.loginUser =catchAsyncError(async(req,res,next)=>{
     }
     const isPasswordMatched = await user.comparePassword(password);
     if(!isPasswordMatched){
-        return next(new ErrorHandler("user is not found with this email & password",401));
+        return next(new ErrorHandler("Password is Invalid",401));
     }
  
     sendToken(user,201,res);
+
 
 });
 

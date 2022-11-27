@@ -43,6 +43,9 @@ const Sidebar = () => {
           <Link to="/admin/medicine">
              <p><AddIcon />Create Medicine</p>
           </Link>
+          <Link to="/admin/createdoctor">
+             <p><AddIcon />Add Doctor</p>
+          </Link>
           
 
          

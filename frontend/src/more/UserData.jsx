@@ -7,6 +7,8 @@ import PersonIcon from "@material-ui/icons/Person";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import ListAltIcon from "@material-ui/icons/ListAlt";
 import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
+import LocalHospitalIcon from '@mui/icons-material/LocalHospital';
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import Support from "@material-ui/icons/ReportProblem"
 import HomeIcon from "@material-ui/icons/Home";
 import { useNavigate } from 'react-router-dom';
@@ -18,6 +20,7 @@ const UserData = ({ user }) => {
   const navigate =useNavigate();
 
    const { cartItems } = useSelector((state) => state.cart);
+   const { doctorAppoin } = useSelector((state) => state.doctorCart);
 
 
   const [open, setOpen] = useState(false);
@@ -38,25 +41,55 @@ const UserData = ({ user }) => {
 
   const options = [
     { icon: <HomeIcon />, name: "Home", func: home },
-    { icon: <ListAltIcon />, name: "Orders", func: orders },
-    { icon: <ListAltIcon />, name: "Appointments", func: appointments },
-    {
-      icon: (
-        <ShoppingCartIcon
-        style={{
-          color: cartItems.length === 0 ? "" :"tomato" ,
-        }}
-        />
-      ),
-      name : `Cart (${cartItems.length })`,
-      func: cart,
-    },
-   
     { icon: <PersonIcon />, name: "Profile", func: account },
-    { icon: <Support />, name: "Report us", func: report },
     { icon: <ExitToAppIcon />, name: "Logout", func: logoutUser },
   ];
+  if (user.role === "user") {
+    options.unshift({
+      icon:<Support />,
+      name: "Report us",
+      func: report,
+    });
+  }
+  if (user.role === "user") {
+    options.unshift({
+      icon: <ListAltIcon />,
+      name: "Orders",
+      func: orders,
+    });
+  }
 
+  if (user.role === "user") {
+    options.unshift({
+      icon:<LocalHospitalIcon />,
+      name: "Appointments",
+      func: appointments,
+    });
+  }
+
+  if (user.role === "user") {
+    options.unshift({
+      icon: <ShoppingCartIcon
+      style={{
+        color: cartItems.length === 0 ? "" :"tomato" ,
+      }}
+      />,
+      name: `Cart (${cartItems.length })`,
+      func: cart,
+    });
+  }
+  if (user.role === "user") {
+    options.unshift({
+      icon: <FavoriteBorderIcon
+      style={{
+        color: doctorAppoin.length === 0 ? "" :"tomato" ,
+      }}
+      />,
+      name:`Doctor Appoint (${doctorAppoin.length })`,
+      func: appointment,
+    });
+  }
+ 
   if (user.role === "admin") {
     options.unshift({
       icon: <DashboardIcon />,
@@ -78,15 +111,6 @@ const UserData = ({ user }) => {
   function home() {
     navigate("/");
   }
-  function orders() {
-    navigate("/orders");
-  }
-  function appointments() {
-    navigate("/appointments");
-  }
-  function cart() {
-    navigate("/cart");
-  }
  
   function account() {
     navigate("/me");
@@ -101,6 +125,21 @@ const UserData = ({ user }) => {
     toast.success("Logout Successfully");
     navigate("/");
   }
+
+  function orders() {
+    navigate("/orders");
+  }
+  function appointments() {
+    navigate("/appointments");
+  }
+  function cart() {
+    navigate("/cart");
+  }
+
+  function appointment() {
+    navigate("/doctorcart");
+  }
+ 
 
   return (
     <>

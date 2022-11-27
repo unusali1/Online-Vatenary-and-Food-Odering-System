@@ -1,4 +1,4 @@
-import React, {useEffect, useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import CheckoutSteps from "./CheckoutSteps";
 import { useSelector, useDispatch } from "react-redux";
 import MetaData from "../../more/Metadata";
@@ -25,7 +25,7 @@ const Payment = () => {
 
   const navigate = useNavigate();
   const orderInfo = JSON.parse(sessionStorage.getItem("orderInfo"));
-  
+
 
   const dispatch = useDispatch();
   const stripe = useStripe();
@@ -34,26 +34,26 @@ const Payment = () => {
 
   const { shippingInfo, cartItems } = useSelector((state) => state.cart);
   const { user } = useSelector((state) => state.user);
-  const { error,loading } = useSelector((state) => state.order);
+  const { error, loading } = useSelector((state) => state.order);
 
   const paymentData = {
     amount: Math.round(orderInfo.totalPrice * 100),
   };
 
   const order = {
-     shippingInfo,
-     orderItems: cartItems,
-     itemsPrice: orderInfo.subtotal,
-     shippingPrice: orderInfo.shippingCharges,
-     totalPrice: orderInfo.totalPrice,
+    shippingInfo,
+    orderItems: cartItems,
+    itemsPrice: orderInfo.subtotal,
+    shippingPrice: orderInfo.shippingCharges,
+    totalPrice: orderInfo.totalPrice,
   };
+
+
 
   const submitHandler = async (e) => {
     e.preventDefault();
-
     payBtn.current.disabled = true;
-
-    try {
+     try {
       const config = {
         headers: {
           "Content-Type": "application/json",
@@ -97,6 +97,7 @@ const Payment = () => {
           };
 
           dispatch(createOrder(order));
+         
 
           navigate("/success");
         } else {
@@ -117,51 +118,51 @@ const Payment = () => {
   }, [dispatch, error]);
 
   return (
-   <>
-   {loading ? (
-     <Loading />
-   ) : (
     <>
-    <MetaData title="Payment" />
-    <CheckoutSteps activeStep={2} />
-    <div className="paymentContainer">
-      <form className="paymentForm" onSubmit={(e) => submitHandler(e)}>
-        <Typography>Card Info</Typography>
-        <div>
-          <CreditCardIcon />
-          <CardNumberElement className="paymentInput" />
-        </div>
-        <div>
-          <EventIcon />
-          <CardExpiryElement className="paymentInput" />
-        </div>
-        <div>
-          <VpnKeyIcon />
-          <CardCvcElement className="paymentInput" />
-        </div>
+      {loading ? (
+        <Loading />
+      ) : (
+        <>
+          <MetaData title="Payment" />
+          <CheckoutSteps activeStep={2} />
+          <div className="paymentContainer">
+            <form className="paymentForm"   onSubmit={(e) => submitHandler(e)}>
+              <Typography>Card Info</Typography>
+              <div>
+                <CreditCardIcon />
+                <CardNumberElement className="paymentInput" />
+              </div>
+              <div>
+                <EventIcon />
+                <CardExpiryElement className="paymentInput" />
+              </div>
+              <div>
+                <VpnKeyIcon />
+                <CardCvcElement className="paymentInput" />
+              </div>
 
-        <input
-          type="submit"
-          value={`Pay - ৳ ${orderInfo && orderInfo.totalPrice}`}
-          ref={payBtn}
-          className="paymentFormBtn"
-        />
-      </form>
-    </div>
-    <ToastContainer 
-     position="bottom-center"
-     autoClose={5000}
-     hideProgressBar={false}
-     newestOnTop={false}
-     closeOnClick
-     rtl={false}
-     pauseOnFocusLoss
-     draggable
-     pauseOnHover
-     />
-  </>
-   )}
-   </>
+              <input
+                type="submit"
+                value={`Pay - ৳ ${orderInfo && orderInfo.totalPrice}`}
+                ref={payBtn}
+                className="paymentFormBtn"
+              />
+            </form>
+          </div>
+          <ToastContainer
+            position="bottom-center"
+            autoClose={5000}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+          />
+        </>
+      )}
+    </>
   );
 };
 

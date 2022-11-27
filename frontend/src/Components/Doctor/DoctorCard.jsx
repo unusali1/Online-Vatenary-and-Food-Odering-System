@@ -6,7 +6,7 @@ const DoctorCard = ({ doctor }) => {
     <>
       <Link className="ProductCard" to={`/doctor/${doctor._id}`}>
             <img
-              src={doctor.avatar}
+              src={doctor.images}
               alt={doctor.name}
               className="ProductImg"
             />

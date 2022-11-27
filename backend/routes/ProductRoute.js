@@ -22,7 +22,7 @@ router
   .route("/product/new")
   .post(isAuthenticatedUser, authorizeRoles("admin"), createProduct);
  
-//router.post("/product/new", upload.single("image"), createProduct);
+
 router
   .route("/product/:id")
   .put(isAuthenticatedUser, authorizeRoles("admin"), updateProduct);

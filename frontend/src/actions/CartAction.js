@@ -22,7 +22,7 @@ import {
     });
   
     localStorage.setItem("cartItems", JSON.stringify(getState().cart.cartItems));
-  };
+  }
 
   // REMOVE FROM CART ---Product
   export const removeItemsFromCart = (id) => async (dispatch, getState) => {

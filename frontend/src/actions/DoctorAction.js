@@ -1,5 +1,35 @@
 import axios from "axios";
-import { ADMIN_DOCTOR_FAIL, ADMIN_DOCTOR_REQUEST, ADMIN_DOCTOR_SUCCESS, ALL_DOCTORS_FAIL, ALL_DOCTORS_REQUEST, ALL_DOCTORS_SUCCESS, CLEAR_ERRORS, DELETE_DOCTOR_FAIL, DELETE_DOCTOR_REQUEST, DELETE_DOCTOR_SUCCESS, DOCTOR_DETAILS_FAIL, DOCTOR_DETAILS_REQUEST, DOCTOR_DETAILS_SUCCESS } from "../constants/DoctorConstants";
+import { ADMIN_DOCTOR_FAIL, ADMIN_DOCTOR_REQUEST, ADMIN_DOCTOR_SUCCESS, ALL_DOCTORS_FAIL, ALL_DOCTORS_REQUEST, ALL_DOCTORS_SUCCESS, CLEAR_ERRORS, DELETE_DOCTOR_FAIL, DELETE_DOCTOR_REQUEST, DELETE_DOCTOR_SUCCESS, DOCTOR_DETAILS_FAIL, DOCTOR_DETAILS_REQUEST, DOCTOR_DETAILS_SUCCESS, NEW_DOCTOR_FAIL, NEW_DOCTOR_REQUEST, NEW_DOCTOR_SUCCESS, UPDATE_DOCTOR_FAIL, UPDATE_DOCTOR_REQUEST, UPDATE_DOCTOR_SUCCESS } from "../constants/DoctorConstants";
+
+
+// Create Product --------Admin
+export const createDoctor = (doctorData) => async (dispatch) => {
+  try {
+    dispatch({ type: NEW_DOCTOR_REQUEST });
+
+    const config = {
+      headers: { "Content-Type": "application/json" },
+    };
+
+    const { data } = await axios.post(
+      `/api/v2/doctor/new`,
+      doctorData,
+      config
+    );
+
+    dispatch({
+      type: NEW_DOCTOR_SUCCESS,
+      payload: data,
+    });
+  } catch (error) {
+    dispatch({
+      type: NEW_DOCTOR_FAIL,
+      payload: error.response.data.message,
+    });
+  }
+};
+
+
 
 
 export const getDoctor= (keyword="",currentPage=1,category) => async (dispatch)=>{
@@ -81,6 +111,33 @@ export const deleteDoctor = (id) => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: DELETE_DOCTOR_FAIL,
+      payload: error.response.data.message,
+    });
+  }
+};
+
+// Update Product
+export const updateDoctor = (id, doctorData) => async (dispatch) => {
+  try {
+    dispatch({ type: UPDATE_DOCTOR_REQUEST });
+
+    const config = {
+      headers: { "Content-Type": "application/json" },
+    };
+
+    const { data } = await axios.put(
+      `/api/v2/doctor/${id}`,
+      doctorData,
+      config
+    );
+
+    dispatch({
+      type: UPDATE_DOCTOR_SUCCESS,
+      payload: data.success,
+    });
+  } catch (error) {
+    dispatch({
+      type: UPDATE_DOCTOR_FAIL,
       payload: error.response.data.message,
     });
   }
